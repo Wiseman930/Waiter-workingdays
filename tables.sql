@@ -14,8 +14,6 @@ CREATE TABLE available_days(
     FOREIGN KEY (working_days) REFERENCES weekly_days(id) ON DELETE CASCADE
 );
 
-ALTER TABLE available_days ADD UNIQUE (working_days);
-
 INSERT INTO weekly_days (day) VALUES
 ('Monday'),
 ('Tuesday'),
@@ -24,3 +22,4 @@ INSERT INTO weekly_days (day) VALUES
 ('Friday'),
 ('Saturday'),
 ('Sunday');
+
