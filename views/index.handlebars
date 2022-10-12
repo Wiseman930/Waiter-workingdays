@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="heads">
+        <table>
+            <tr>
+                <td>
+                    <div class="div">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2316/2316884.png" alt="no image" class="center2">
+                    </div>
+                </td>
+                <td>
+                    <h1>Waiter Availability</h1>
+                </td>
+                <td>
+                    <div class="admin"><a href="/days"> Admin </a></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="div">
+        <img src="https://cdn-icons-png.flaticon.com/512/2356/2356900.png" alt="no image" class="center">
+    </div>
+    <form action="waiter" method="post">
+        <div class="Main">
+            <label for="sizeLarge">Enter your name</label>
+            <input type="text" placeholder="" id="fname" name="fname">
+            <label for="fname"></label>
+            <input type="submit" class="log" name="fontSizeControl" id="sizeLarge" value="Login" />
+        </div>
+    </form>
+    <div class="errorMessages">
+        {{#if messages.errors}}
+        <span>{{messages.errors}}</span>
+        {{/if}}
+    </div>
+
+</body>
+
+</html>

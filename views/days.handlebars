@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+    margin: 0%;
+    background-color: #ffffff;
+    font-family: Copperplate,Copperplate Gothic Light,fantasy;
+}
+.update{
+  text-align: center;
+  margin-top: 30px;
+}
+
+h1{
+    color: #000000;
+    margin: 0%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    transform: translateX(-15px);
+}
+.center3{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40px;
+  height: 40px;
+  margin-top: 20px;
+  transform: translateX(350px);
+  padding-bottom: 25px;
+}
+.heads{
+  background-color: #fca311;
+}
+.home{
+  transform: translateX(-350px);
+  background-color: #e5e5e5;
+  border-color: #000000;
+  border-radius: 8px;
+  color: #000000;
+  padding: 12px;
+}
+.admin{
+  transform: translateX(350px);
+  background-color: #e5e5e5;
+  border-color: #000000;
+  border-radius: 8px;
+  color: #000000;
+  padding: 12px;
+}
+.Main{
+    text-align: center;
+    font-size: large;
+    margin-top: 260px;
+}
+.log{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: aquamarine;
+  background-color: #e5e5e5;
+  border-color: #000000;
+  color: #000000;
+  border-radius: 8px;
+}
+#fname{
+    height: 35px;
+}
+.weekDays-selector{
+    padding-top: 80px;
+    text-align: center;
+
+
+}
+.weekDays-selector input {
+    display: none!important;
+
+  }
+
+  .weekDays-selector input[type=checkbox] + label {
+    display: inline-block;
+    border-radius: 6px;
+    background: #e5e5e5;
+    height: 40px;
+    width: 70px;
+    padding: 15px;
+    margin-right: 3px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    font-size:smaller;
+
+  }
+
+  .weekDays-selector input[type=checkbox]:checked + label {
+    background: #0b090a;
+    color: #ffffff;
+  }
+.weekDays-selector2{
+    padding-top: 45px;
+    text-align: center;
+}
+.weekDays-selector2 input {
+    display: none!important;
+
+  }
+  .weekDays-selector2 input[type=checkbox] + label {
+    display: inline-block;
+    border-radius: 6px;
+    background: #e5e5e5;
+    height: 25px;
+    width: 40px;
+    padding: 10px;
+    margin-right: 3px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    font-size:small;
+  }
+
+  .weekDays-selector2 input[type=checkbox]:checked + label {
+    background: #0b090a;
+    color: #ffffff;
+  }
+  h2{
+    text-align: center;
+  }
+  .errorMessages{
+    text-align: center;
+    padding-top: 25px ;
+    color: #a4161a;
+    font-size: 30px;
+    font-weight: 700;
+    animation: hideAnimation 0s ease-in 4s;
+    animation-fill-mode: forwards;
+  }
+.updateMessages{
+    text-align: center;
+    padding-top: 25px ;
+    color: green;
+    font-size: 30px;
+    font-weight: 700;
+    animation: hideAnimation 0s ease-in 4s;
+    animation-fill-mode: forwards;
+  }
+  table, th, td {
+    margin: auto;
+    text-align: left;
+  }
+  .dot {
+  height: 25px;
+  width: 25px;
+  background-color: green;
+  border-radius: 50%;
+  display:block;
+  padding: 8px;
+  margin: 2px
+}
+.dot2 {
+  height: 25px;
+  width: 25px;
+  background-color: orange;
+  border-radius: 50%;
+  display:block;
+  padding: 8px;
+  margin: 2px
+}
+.dot3 {
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 50%;
+  display:block;
+  padding: 8px;
+  margin: 2px;
+}
+
+.labelling{
+ border-color: #000000;
+ border-radius: 8px;
+ display:grid;
+ grid-template-columns: 1fr 15fr;
+ padding: 16px;
+
+ font-family: Copperplate,Copperplate Gothic Light,fantasy;
+}
+.thedays{
+ border-color: #000000;
+ border-radius: 8px;
+ display:grid;
+ grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+ padding: 15px;
+ font-family: Copperplate,Copperplate Gothic Light,fantasy;
+ padding: 70px 0;
+}
+.dots {
+  height: 25px;
+  width: 25px;
+  background-color: white;
+  border-radius: 10px;
+  display:block;
+  padding: 8px;
+  margin: 2px;
+  width: 100px;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  text-align: center
+}
+.green {
+  height: 25px;
+  width: 25px;
+  background-color: green;
+  border-radius: 10px;
+  display:block;
+  padding: 8px;
+  margin: 2px;
+  width: 100px;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  text-align: center;
+  color: antiquewhite;
+}
+.orange {
+  height: 25px;
+  width: 25px;
+  background-color: orange;
+  border-radius: 10px;
+  display:block;
+  padding: 8px;
+  margin: 2px;
+  width: 100px;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  text-align: center;
+  color: black;
+}
+.red {
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 10px;
+  display:block;
+  padding: 8px;
+  margin: 2px;
+  width: 100px;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  text-align: center;
+  color: antiquewhite;
+}
+.content{
+ display:grid;
+ grid-template-columns: 3.6fr 15fr;
+  background-color: #e5e5e5;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+  @keyframes hideAnimation {
+    to {
+      visibility: hidden;
+      width: 0;
+      height: 0;
+    }
+  }
+</style>
+<body>
+<form action="days" method="post">
+    <div class="heads">
+    <table>
+        <tr>
+            <td>
+        <div class="home"><a href="/"> Home </a></div>
+            </td>
+            <td>
+            <h1>Waiter Availability</h1>
+            </td>
+            <td>
+                 <div class="div">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2316/2316884.png" alt="no image"class="center3">
+                    </div>
+            </td>
+        </tr>
+    </table>
+    </div>
+
+ <div class="content">
+<div class="labelling">
+  <span class="dot"></span>
+  <label class="labels">Enough waiters</label>
+  <span class="dot2"></span>
+  <label class="labels">Need more waiters</label>
+  <span class="dot3"></span>
+  <label class="labels">Too much waiters</label>
+</div>
+<div class="thedays">
+  <span class="{{colorMon}}">Monday</span>
+  <span class="{{colorTues}}">Tuesday</span>
+  <span class="{{colorWed}}">Wednesday</span>
+  <span class="{{colorThurs}}">Thursday</span>
+  <span class="{{colorFri}}">Friday</span>
+  <span class="{{colorSat}}">Saturday</span>
+  <span class="{{colorSun}}">Sunday</span>
+</div>
+</div>
+<div class="update">
+    <input type="submit" class="log" name="fontSizeControl"  id="sizeLarge" value="Reset"/>
+</div>
+<div class="weekDays-selector2">
+    <table>
+        {{#each allNames}}
+        <tr>
+            <td>
+                {{names2}}
+            </td>
+            <td>
+                <input type="checkbox" id="weekday-mon" class="weekday" name="weekday" value=1 {{monday}} />
+                <label for="weekday-mon">Mon</label>
+                <input type="checkbox" id="weekday-tue" class="weekday" name="weekday" value=2 {{tuesday}} />
+                <label for="weekday-tue">Tues</label>
+                <input type="checkbox" id="weekday-wed" class="weekday" name="weekday" value=3 {{wednesday}} />
+                <label for="weekday-wed">Wed</label>
+                <input type="checkbox" id="weekday-thu" class="weekday" name="weekday" value=4 {{thursday}} />
+                <label for="weekday-thu">Thurs</label>
+                <input type="checkbox" id="weekday-fri" class="weekday" name="weekday" value=5 {{friday}} />
+                <label for="weekday-fri">Fri</label>
+                <input type="checkbox" id="weekday-sat" class="weekday" name="weekday" value=6 {{saturday}} />
+                <label for="weekday-sat">Sat</label>
+                <input type="checkbox" id="weekday-sun" class="weekday" name="weekday" value=7 {{sunday}}/>
+                <label for="weekday-sun">Sun</label>
+                <hr>
+            </td>
+        </tr>
+           {{/each}}
+    </table>
+</div>
+    <div class="errorMessages">
+        {{#if messages.errors}}
+        <span>{{messages.errors}}</span>
+        {{/if}}
+    </div>
+      <div class="updateMessages">
+        {{#if messages.update}}
+        <span>{{messages.update}}</span>
+        {{/if}}
+    </div>
+
+</body>
+</html>

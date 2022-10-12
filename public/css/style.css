@@ -1,0 +1,182 @@
+body{
+    margin: 0%;
+    background-color: #ffffff;
+    font-family: Copperplate,Copperplate Gothic Light,fantasy;
+}
+.update{
+  text-align: center;
+  margin-top: 30px;
+}
+
+h1{
+    color: #000000;
+    margin: 0%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    transform: translateX(15px);
+
+}
+
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  height: 300px;
+  margin-top: 30px;
+}
+.center2{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40px;
+  height: 40px;
+  margin-top: 20px;
+  transform: translateX(-350px);
+  padding-bottom: 25px;
+}
+.div {
+  text-align: center;
+}
+.heads{
+  background-color: #fca311;
+}
+.home{
+  transform: translateX(-350px);
+  background-color: #e5e5e5;
+  border-color: #000000;
+  border-radius: 8px;
+  color: #000000;
+  padding: 12px;
+}
+.admin{
+  transform: translateX(350px);
+  background-color: #e5e5e5;
+  border-color: #000000;
+  border-radius: 8px;
+  color: #000000;
+  padding: 12px;
+}
+.Main{
+    text-align: center;
+    font-size: large;
+    margin-top: 30px;
+}
+.log{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: aquamarine;
+  background-color: #e5e5e5;
+  border-color: #000000;
+  color: #000000;
+  border-radius: 8px;
+}
+#fname{
+    height: 35px;
+}
+.weekDays-selector{
+    padding-top: 80px;
+    text-align: center;
+
+
+}
+.weekDays-selector input {
+    display: none!important;
+
+  }
+
+  .weekDays-selector input[type=checkbox] + label {
+    display: inline-block;
+    border-radius: 6px;
+    background: #e5e5e5;
+    height: 40px;
+    width: 70px;
+    padding: 15px;
+    margin-right: 3px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    font-size:smaller;
+
+  }
+
+  .weekDays-selector input[type=checkbox]:checked + label {
+    background: #0b090a;
+    color: #ffffff;
+  }
+.weekDays-selector2{
+    padding-top: 45px;
+    text-align: center;
+}
+.weekDays-selector2 input {
+    display: none!important;
+
+  }
+  .weekDays-selector2 input[type=checkbox] + label {
+    display: inline-block;
+    border-radius: 6px;
+    background: #e5e5e5;
+    height: 25px;
+    width: 40px;
+    padding: 10px;
+    margin-right: 3px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    font-size:small;
+  }
+
+  .weekDays-selector2 input[type=checkbox]:checked + label {
+    background: #0b090a;
+    color: #ffffff;
+  }
+  h2{
+    text-align: center;
+  }
+  .errorMessages{
+    text-align: center;
+    padding-top: 25px ;
+    color: #a4161a;
+    font-size: 30px;
+    font-weight: 700;
+    animation: hideAnimation 0s ease-in 4s;
+    animation-fill-mode: forwards;
+  }
+  .updateMessages{
+    text-align: center;
+    padding-top: 25px ;
+    color: green;
+    font-size: 30px;
+    font-weight: 700;
+    animation: hideAnimation 0s ease-in 4s;
+    animation-fill-mode: forwards;
+  }
+  table, th, td {
+    margin: auto;
+    text-align: left;
+  }
+  @keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 5;
+    }
+}
+.center {
+    animation: blink 3s;
+    animation-iteration-count: infinite;
+}
+
+  @keyframes hideAnimation {
+    to {
+      visibility: hidden;
+      width: 0;
+      height: 0;
+    }
+  }
