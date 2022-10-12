@@ -1,4 +1,4 @@
-/*CREATE TABLE IF NOT EXISTS weekly_days (
+CREATE TABLE IF NOT EXISTS weekly_days (
     id SERIAL PRIMARY KEY,
     day text NOT NULL
 );
@@ -12,9 +12,9 @@ CREATE TABLE available_days(
     waiter_id INT NOT NULL,
     FOREIGN KEY (waiter_id) REFERENCES working_waiters(id) ON DELETE CASCADE,
     FOREIGN KEY (working_days) REFERENCES weekly_days(id) ON DELETE CASCADE
-);*/
+);
 
-/*ALTER TABLE available_days ADD UNIQUE (working_days);*/
+ALTER TABLE available_days ADD UNIQUE (working_days);
 
 INSERT INTO weekly_days (day) VALUES
 ('Monday'),
