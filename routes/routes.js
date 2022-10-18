@@ -37,7 +37,7 @@ module.exports = function waiterRoute(db, waitersFunction){
 
      async function waiterRoute (req, res) {
       let userCode = req.body.fname
-      let name = await db.oneOrNone('SELECT names FROM working_waiters WHERE code=$1', [userCode])
+      let name = await db.oneOrNone('SELECT names FROM working_waiters WHERE code=$1', [userCode]) || {}
       let format = /^[A-Za-z]+$/
       let upperName = name.names.toUpperCase()
       let storedCode = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE code=$1', [userCode])
@@ -123,7 +123,6 @@ module.exports = function waiterRoute(db, waitersFunction){
           let arrayNames = dataNames.map(a => a.id)
           let count = await db.manyOrNone('SELECT names FROM working_waiters')
           let daysCount = await db.oneOrNone('SELECT COUNT(*) FROM available_days')
-          let adminCount = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE names=$1', 'ADMIN')
           let names = count.map(a => a.names)
           let checkState = [];
 

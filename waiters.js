@@ -71,7 +71,7 @@ module.exports = function waitersWorking(db){
     let stringToArray = []
     let storedNameID = id;
     //inserting for multiple days in an array
-    if(typeof days === 'object'){
+    if(typeof days === 'object' && days.length >= 3){
       for (let i = 0; i < days.length; i++) {
             CountMany = await db.oneOrNone('SELECT count(*) FROM available_days WHERE working_days=$1 AND waiter_id=$2', [days[i], storedNameID])
             if( CountMany.count == 0){
