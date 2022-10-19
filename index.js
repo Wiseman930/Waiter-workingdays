@@ -7,6 +7,7 @@ const session = require("express-session");
 const app = express();
 const myFunction = require('./waiters')
 const pgp = require("pg-promise")();
+let shortCode = require('short-unique-id')
 
 
 let useSSL = false;
@@ -18,14 +19,15 @@ const DATABASE_URL = process.env.DATABASE_URL || "postgresql://postgres:pg1999@l
 
 const config = {
   connectionString: DATABASE_URL,
-  ssl: {
+ /* ssl: {
     rejectUnauthorized: false,
-  },
+  },*/
 };
 
 const db = pgp(config);
 const waitersFunction = myFunction(db);
 module.exports = db
+
 
 const myDays = require('./routes/routes')
 const thedays = myDays(db, waitersFunction)
@@ -46,6 +48,9 @@ app.use(
 
 app.get('/', thedays.home);
 
+app.post('/register', thedays.postRegisterCode)
+
+app.get('/index', thedays.login)
 
 app.post('/waiter', thedays.waiterRoute);
 
@@ -57,10 +62,10 @@ app.get('/days', thedays.dayGet);
 
 app.post('/days', thedays.dayPost);
 
+app.post('/admin_update', thedays.updateAdmin);
 
 
-
-let PORT = process.env.PORT || 3007;
+let PORT = process.env.PORT || 3012;
 
 app.listen(PORT, function(){
   console.log('App starting on port', PORT);

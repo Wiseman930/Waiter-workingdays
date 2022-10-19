@@ -1,45 +1,53 @@
 module.exports = function waitersWorking(db){
 
-  let list = []
-
    async function deleteAll(){
-    await db.none('DELETE FROM working_waiters;');
-    await db.none('DELETE FROM available_days;')
+    await db.none('DELETE FROM working_waiters WHERE names!=$1;', 'ADMIN');
+    await db.none('DELETE FROM available_days;');
+    return await db.manyOrNone('SELECT working_days FROM available_days')
   }
+  async function registerAll(firstName, code){
+   await db.none('INSERT INTO working_waiters(names, code) values($1, $2)', [firstName, code])
+   }
+   async function returnRegistered(){
+    return await db.one('SELECT names,code FROM working_waiters')
+   }
    async function loginNames(logNames, days){
-      toNewDays = days
-      let dayToNumber = [];
-      let upperNames = logNames
-      let CountMany;
-      let storedNames = await db.oneOrNone('SELECT names FROM working_waiters WHERE names=$1', [upperNames])
-      let storedNameID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", [upperNames])
+    toNewDays = days
+    let dayToNumber = [];
+    let upperNames = logNames
+    let CountMany;
+    let storedNames = await db.oneOrNone('SELECT names FROM working_waiters WHERE names=$1', [upperNames])
+    let storedNameID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", [upperNames])
 
-        if(storedNames == null){
-            await db.none('INSERT INTO working_waiters(names) values($1)', [upperNames])
-        }
-       if(typeof days === 'object'){
-        for (let i = 0; i < days.length; i++) {
-              CountMany = await db.oneOrNone('SELECT count(*) FROM available_days WHERE working_days=$1 AND waiter_id=$2', [days[i], storedNameID.id])
-              if( CountMany.count == 0){
-                await db.manyOrNone('INSERT INTO available_days (working_days, waiter_id) values($1, $2)', [days[i], storedNameID.id])
-              }
+      if(storedNames == null){
+          await db.none('INSERT INTO working_waiters(names) values($1)', [upperNames])
+      }
+     if(typeof days === 'object' && days.length >= 3){
+      for (let i = 0; i < days.length; i++) {
+            CountMany = await db.oneOrNone('SELECT count(*) FROM available_days WHERE working_days=$1 AND waiter_id=$2', [days[i], storedNameID.id])
+            if( CountMany.count == 0){
+              await db.manyOrNone('INSERT INTO available_days (working_days, waiter_id) values($1, $2)', [days[i], storedNameID.id])
             }
-
-        }
-
-       if(typeof days === 'string'){
-        dayToNumber = Array.from(days)
-        for (let i = 0; i < dayToNumber.length; i++) {
-          CountMany = await db.oneOrNone('SELECT count(*) FROM available_days WHERE working_days=$1 AND waiter_id=$2', [dayToNumber[i], storedNameID.id])
-          if( CountMany.count == 0){
-            await db.oneOrNone('INSERT INTO available_days (working_days, waiter_id) values($1, $2)', [dayToNumber[i], storedNameID.id])
-
           }
+
+      }
+
+     if(typeof days === 'string'){
+      dayToNumber = Array.from(days)
+      for (let i = 0; i < dayToNumber.length; i++) {
+        CountMany = await db.oneOrNone('SELECT count(*) FROM available_days WHERE working_days=$1 AND waiter_id=$2', [dayToNumber[i], storedNameID.id])
+        if( CountMany.count == 0){
+          await db.oneOrNone('INSERT INTO available_days (working_days, waiter_id) values($1, $2)', [dayToNumber[i], storedNameID.id])
+
         }
       }
     }
+    }
 
+
+    //filtering days in database for a specific user
    async function getNames(logNames, days){
+
     let upperNames = logNames
     let storedNameID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", [upperNames]) || {}
     let weekDays = await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1', [storedNameID.id])
@@ -58,28 +66,72 @@ module.exports = function waitersWorking(db){
         }
     }
   }
-  async function getAdminNames(){
-    let getForAdmin = await db.manyOrNone('SELECT names FROM working_waiters')
-    return getForAdmin
-  }
-  async function getWorkingDays(){
 
-        let getDaysAdmin;
-        let dataNames = await db.manyOrNone('SELECT id FROM working_waiters')
-        let arrayNames = dataNames.map(a => a.id)
-        for (let i = 0; i < arrayNames.length; i++) {
-          getDaysAdmin = await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1 ORDER BY waiter_id;', [arrayNames[i]])
-          result = getDaysAdmin.map(a => a.working_days)
+  async function usersForAdmin(id, days){
+    let stringToArray = []
+    let storedNameID = id;
+    //inserting for multiple days in an array
+    if(typeof days === 'object'){
+      for (let i = 0; i < days.length; i++) {
+            CountMany = await db.oneOrNone('SELECT count(*) FROM available_days WHERE working_days=$1 AND waiter_id=$2', [days[i], storedNameID])
+            if( CountMany.count == 0){
+              await db.manyOrNone('INSERT INTO available_days (working_days, waiter_id) values($1, $2)', [days[i], storedNameID])
+            }
+          }
 
+      }
+      //inserting for a single value that is a string
+      if(typeof days === 'string'){
+        stringToArray = Array.from(days)
+        for (let i = 0; i < stringToArray.length; i++) {
+          CountMany = await db.oneOrNone('SELECT count(*) FROM available_days WHERE working_days=$1 AND waiter_id=$2', [stringToArray[i], storedNameID.id])
+          if( CountMany.count == 0){
+            await db.oneOrNone('INSERT INTO available_days (working_days, waiter_id) values($1, $2)', [stringToArray[i], storedNameID.id])
+
+          }
         }
+      }
+}
+  //filtering days in database for a multiple users
+async function deleteAdmin(id, days){
+  let storedNameID = id;
+  let weekDays = await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1', [storedNameID])
+  let finalArray = weekDays.map(function (obj) {
+    return String(obj.working_days);
+  });
+  if (days == undefined){
+    days = []
+  }
+  if (typeof days === 'object' || typeof days === 'string'){
+    let stringToArray = Array.from(days)
+    let filteredArray = finalArray.filter(item => !stringToArray.includes(item));
+    for (let i = 0; i < filteredArray.length; i++) {
+    await db.none('DELETE FROM available_days id WHERE working_days=$1 AND waiter_id=$2', [filteredArray[i], storedNameID])
+      }
+  }
+}
+async function insertValues(uppercaseName, days){
+  let storedNameID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", [uppercaseName]) || {}
+  return await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1', [storedNameID.id])
+}
+async function insertValuesAdmin(user_id, userCheckbox){
+  return await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1', [user_id])
+}
+async function returnUserAdminId(user_id){
+  return user_id
+}
 
-    }
     return {
         loginNames,
         getNames,
-        getAdminNames,
-        getWorkingDays,
-        deleteAll
+        deleteAll,
+        usersForAdmin,
+        deleteAdmin,
+        registerAll,
+        returnRegistered,
+        insertValues,
+        insertValuesAdmin,
+        returnUserAdminId
     }
 
 }
@@ -129,5 +181,16 @@ mobiles.forEach(mobile => {
 
 
 
+/*
+  const characters = [
+      { name: 'Batman', team: 'Justice League' },
+      { name: 'Hulk', team: 'Avengers' },
+      { name: 'Flash', team: 'Justice League' },
+      { name: 'Iron Man', team: 'Avengers' },
+      { name: 'Deadpool', team: 'X-Force' }
+    ];
 
+    const avengers = characters.filter(character => character.team !== 'Avengers' || character.name !== 'Hulk' );
+   // console.log(avengers)
+*/
 

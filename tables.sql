@@ -4,8 +4,13 @@ CREATE TABLE IF NOT EXISTS weekly_days (
 );
 CREATE TABLE working_waiters(
     id SERIAL PRIMARY KEY,
-    names text NOT NULL
+    names text NOT NULL,
+    code TEXT NOT NULL
 );
+
+/*ALTER TABLE working_waiters ADD code TEXT NOT NULL;*/
+
+
 CREATE TABLE available_days(
     id serial not null primary key,
     working_days INT NOT NULL,

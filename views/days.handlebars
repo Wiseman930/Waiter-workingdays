@@ -17,6 +17,17 @@
   margin-top: 30px;
 }
 
+.reset_update{
+  text-align: center;
+  margin-top: 30px;
+
+}
+.admin_user{
+  text-align: center;
+  margin-top: 30px;
+
+}
+
 h1{
     color: #000000;
     margin: 0%;
@@ -68,6 +79,34 @@ h1{
   border-color: #000000;
   color: #000000;
   border-radius: 8px;
+}
+.Reset{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: aquamarine;
+  background-color: #e5e5e5;
+  border-color: #000000;
+  color: #000000;
+  border-radius: 8px;
+  width: 120px;
+  height: 40px;
+  transform: translateY(30px) translateX(-90px);
+}
+.Update{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: aquamarine;
+  background-color: #e5e5e5;
+  border-color: #000000;
+  color: #000000;
+  border-radius: 8px;
+  width: 120px;
+  height: 40px;
+  transform: translateY(-40px) translateX(90px);
 }
 #fname{
     height: 35px;
@@ -133,7 +172,6 @@ h1{
   }
   .errorMessages{
     text-align: center;
-    padding-top: 25px ;
     color: #a4161a;
     font-size: 30px;
     font-weight: 700;
@@ -142,12 +180,12 @@ h1{
   }
 .updateMessages{
     text-align: center;
-    padding-top: 25px ;
     color: green;
     font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 4s;
     animation-fill-mode: forwards;
+    transform: translateY(-20px) translateX(0px);
   }
   table, th, td {
     margin: auto;
@@ -160,7 +198,8 @@ h1{
   border-radius: 50%;
   display:block;
   padding: 8px;
-  margin: 2px
+  margin: 2px;
+
 }
 .dot2 {
   height: 25px;
@@ -183,11 +222,9 @@ h1{
 
 .labelling{
  border-color: #000000;
- border-radius: 8px;
  display:grid;
  grid-template-columns: 1fr 15fr;
- padding: 16px;
-
+ padding: 23px;
  font-family: Copperplate,Copperplate Gothic Light,fantasy;
 }
 .thedays{
@@ -218,6 +255,7 @@ h1{
   border-radius: 10px;
   display:block;
   padding: 8px;
+  padding-top: 16px;
   margin: 2px;
   width: 100px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
@@ -231,6 +269,7 @@ h1{
   border-radius: 10px;
   display:block;
   padding: 8px;
+  padding-top: 16px;
   margin: 2px;
   width: 100px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
@@ -244,6 +283,7 @@ h1{
   border-radius: 10px;
   display:block;
   padding: 8px;
+  padding-top: 16px;
   margin: 2px;
   width: 100px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
@@ -253,9 +293,26 @@ h1{
 .content{
  display:grid;
  grid-template-columns: 3.6fr 15fr;
-  background-color: #e5e5e5;
-  border-radius: 10px;
-  margin-top: 30px;
+ background-color: #e5e5e5;
+}
+.weekday{
+ background: #e5e5e5;
+    color: #000000;
+    margin: 5px;
+    border-radius: 8px;
+    border-color: #000000;
+    padding: 5px;
+    font-size: small;
+}
+.checks{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.checkboxes{
+  padding-top: 0px;
+}
+.labels{
+   transform: translateY(15px);
 }
   @keyframes hideAnimation {
     to {
@@ -266,12 +323,15 @@ h1{
   }
 </style>
 <body>
-<form action="days" method="post">
+
     <div class="heads">
     <table>
         <tr>
             <td>
         <div class="home"><a href="/"> Home </a></div>
+            </td>
+            <td>
+                <div class="home"><a href="/index"> Login </a></div>
             </td>
             <td>
             <h1>Waiter Availability</h1>
@@ -304,10 +364,29 @@ h1{
   <span class="{{colorSun}}">Sunday</span>
 </div>
 </div>
-<div class="update">
-    <input type="submit" class="log" name="fontSizeControl"  id="sizeLarge" value="Reset"/>
+<form action="days" method="post">
+<div class="reset_update">
+    <input type="submit" class="button-primary Reset" name="reset"  id="sizeLarge" value="Reset"/>
 </div>
-<div class="weekDays-selector2">
+</form>
+
+<form action="admin_update" method="post">
+  <div class="admin_user">
+  <input type="submit" class="button-primary Update" name="update"  id="sizeLarge" value="Update"/>
+</div>
+    <span>
+    <div class="errorMessages">
+        {{#if messages.errors}}
+        {{messages.errors}}
+        {{/if}}
+    </div>
+    <div class="updateMessages">
+        {{#if messages.update}}
+        <span>{{messages.update}}
+        {{/if}}
+    </div>
+    </span>
+  <div class="checkboxes">
     <table>
         {{#each allNames}}
         <tr>
@@ -315,36 +394,42 @@ h1{
                 {{names2}}
             </td>
             <td>
-                <input type="checkbox" id="weekday-mon" class="weekday" name="weekday" value=1 {{monday}} />
+              <div class="checks">
+              <div class="weekday">
+                <input type="checkbox" id="weekday-mon" class="weekday" name="{{names2}}" value=1 {{monday}} />
                 <label for="weekday-mon">Mon</label>
-                <input type="checkbox" id="weekday-tue" class="weekday" name="weekday" value=2 {{tuesday}} />
+              </div>
+              <div class="weekday">
+                <input type="checkbox" id="weekday-tue" class="weekday" name="{{names2}}" value=2 {{tuesday}} />
                 <label for="weekday-tue">Tues</label>
-                <input type="checkbox" id="weekday-wed" class="weekday" name="weekday" value=3 {{wednesday}} />
+              </div>
+                <div class="weekday">
+                <input type="checkbox" id="weekday-wed" class="weekday" name="{{names2}}" value=3 {{wednesday}} />
                 <label for="weekday-wed">Wed</label>
-                <input type="checkbox" id="weekday-thu" class="weekday" name="weekday" value=4 {{thursday}} />
+                 </div>
+                <div class="weekday">
+                <input type="checkbox" id="weekday-thu" class="weekday" name="{{names2}}" value=4 {{thursday}} />
                 <label for="weekday-thu">Thurs</label>
-                <input type="checkbox" id="weekday-fri" class="weekday" name="weekday" value=5 {{friday}} />
+                 </div>
+                <div class="weekday">
+                <input type="checkbox" id="weekday-fri" class="weekday" name="{{names2}}" value=5 {{friday}} />
                 <label for="weekday-fri">Fri</label>
-                <input type="checkbox" id="weekday-sat" class="weekday" name="weekday" value=6 {{saturday}} />
+                 </div>
+                <div class="weekday">
+                <input type="checkbox" id="weekday-sat" class="weekday" name="{{names2}}" value=6 {{saturday}} />
                 <label for="weekday-sat">Sat</label>
-                <input type="checkbox" id="weekday-sun" class="weekday" name="weekday" value=7 {{sunday}}/>
+                 </div>
+                <div class="weekday">
+                <input type="checkbox" id="weekday-sun" class="weekday" name="{{names2}}" value=7 {{sunday}}/>
                 <label for="weekday-sun">Sun</label>
+                 </div>
+                </div>
                 <hr>
             </td>
         </tr>
            {{/each}}
     </table>
-</div>
-    <div class="errorMessages">
-        {{#if messages.errors}}
-        <span>{{messages.errors}}</span>
-        {{/if}}
-    </div>
-      <div class="updateMessages">
-        {{#if messages.update}}
-        <span>{{messages.update}}</span>
-        {{/if}}
-    </div>
-
+  </div>
+</form>
 </body>
 </html>

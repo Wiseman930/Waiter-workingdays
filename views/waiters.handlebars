@@ -33,7 +33,7 @@ h1{
     margin: 0%;
     padding-top: 15px;
     padding-bottom: 15px;
-    transform: translateX(-15px);
+    transform: translateX(-55px);
 
 }
 .center3{
@@ -113,6 +113,7 @@ h1{
     font-weight: 700;
     animation: hideAnimation 0s ease-in 4s;
     animation-fill-mode: forwards;
+     transform: translateY(-25px) translateX(0px);
   }
   table, th, td {
     margin: auto;
@@ -137,6 +138,9 @@ h1{
             <td>
         <div class="home"><a href="/"> Home </a></div>
             </td>
+              <td>
+                    <div class="home"><a href="/index"> Login </a></div>
+                </td>
             <td>
             <h1>Waiter Availability</h1>
             </td>
@@ -172,6 +176,11 @@ h1{
     <input type="submit" class="log" name="fontSizeControl"  id="sizeLarge" value="Update"/>
 </div>
 </form>
+    <div class="errorMessages">
+        {{#if messages.errors}}
+        <span>{{messages.errors}}</span>
+        {{/if}}
+    </div>
   <div class="updateMessages">
         {{#if messages.update}}
         <span>{{messages.update}}</span>

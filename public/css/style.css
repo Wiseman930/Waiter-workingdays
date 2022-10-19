@@ -8,6 +8,7 @@ body{
   margin-top: 30px;
 }
 
+
 h1{
     color: #000000;
     margin: 0%;
@@ -21,8 +22,8 @@ h1{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   margin-top: 30px;
 }
 .center2{
@@ -31,7 +32,7 @@ h1{
   margin-right: auto;
   width: 40px;
   height: 40px;
-  margin-top: 20px;
+  margin-top: 30px;
   transform: translateX(-350px);
   padding-bottom: 25px;
 }
@@ -79,8 +80,6 @@ h1{
 .weekDays-selector{
     padding-top: 80px;
     text-align: center;
-
-
 }
 .weekDays-selector input {
     display: none!important;
@@ -151,6 +150,16 @@ h1{
     font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 4s;
+    animation-fill-mode: forwards;
+    transform: translateY(-40px) translateX(0px);
+  }
+  .codeMessages{
+    text-align: center;
+    padding-top: 25px ;
+    color: green;
+    font-size: 30px;
+    font-weight: 700;
+    animation: hideAnimation 0s ease-in 15s;
     animation-fill-mode: forwards;
   }
   table, th, td {

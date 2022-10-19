@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +8,6 @@
     <title>Document</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
     <div class="heads">
         <table>
@@ -23,7 +21,7 @@
                     <h1>Waiter Availability</h1>
                 </td>
                 <td>
-                    <div class="admin"><a href="/"> Home </a></div>
+                    <div class="admin"><a href="/index"> Login </a></div>
                 </td>
             </tr>
         </table>
@@ -31,12 +29,12 @@
     <div class="div">
         <img src="https://cdn-icons-png.flaticon.com/512/2356/2356900.png" alt="no image" class="center">
     </div>
-    <form action="waiter" method="post">
+    <form action="register" method="post">
         <div class="Main">
             <label for="sizeLarge"></label>
-            <input type="text" placeholder="Enter Passcode" id="fname" name="fname">
+            <input type="text" placeholder="Enter Name" id="fname" name="fname">
             <label for="fname"></label>
-            <input type="submit" class="log" name="fontSizeControl" id="sizeLarge" value="Login"/>
+            <input type="submit" class="log" name="fontSizeControl" id="sizeLarge" value="Register"/>
         </div>
     </form>
     <div class="errorMessages">
@@ -44,7 +42,11 @@
         <span>{{messages.errors}}</span>
         {{/if}}
     </div>
-
+        <div class="codeMessages">
+        {{#if messages.code}}
+        <span>{{messages.code}}</span>
+        {{/if}}
+    </div>
 </body>
-
+</body>
 </html>
