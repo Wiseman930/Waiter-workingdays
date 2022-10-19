@@ -33,7 +33,7 @@ h1{
     margin: 0%;
     padding-top: 15px;
     padding-bottom: 15px;
-    transform: translateX(-15px);
+    transform: translateX(-50px);
 }
 .center3{
   display: block;
@@ -217,24 +217,23 @@ h1{
   border-radius: 50%;
   display:block;
   padding: 8px;
-  margin: 2px;
+  margin: 5.5px;
 }
 
 .labelling{
  border-color: #000000;
  display:grid;
- grid-template-columns: 1fr 15fr;
- padding: 23px;
+ grid-template-columns: 1fr 3.5fr 1fr 3.5fr 1fr 3.5fr;
  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+ margin: auto;
+
 }
 .thedays{
  border-color: #000000;
  border-radius: 8px;
- display:grid;
- grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
- padding: 15px;
+ padding: 10px;
  font-family: Copperplate,Copperplate Gothic Light,fantasy;
- padding: 70px 0;
+
 }
 .dots {
   height: 25px;
@@ -257,7 +256,7 @@ h1{
   padding: 8px;
   padding-top: 16px;
   margin: 2px;
-  width: 100px;
+  width: 60px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   text-align: center;
   color: antiquewhite;
@@ -271,7 +270,7 @@ h1{
   padding: 8px;
   padding-top: 16px;
   margin: 2px;
-  width: 100px;
+  width: 60px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   text-align: center;
   color: black;
@@ -285,16 +284,23 @@ h1{
   padding: 8px;
   padding-top: 16px;
   margin: 2px;
-  width: 100px;
+  width: 60px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   text-align: center;
   color: antiquewhite;
 }
 .content{
  display:grid;
- grid-template-columns: 3.6fr 15fr;
  background-color: #e5e5e5;
+ width: fit-content;
+ text-align: center;
 }
+.grey{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .weekday{
  background: #e5e5e5;
     color: #000000;
@@ -344,26 +350,6 @@ h1{
         </tr>
     </table>
     </div>
-
- <div class="content">
-<div class="labelling">
-  <span class="dot"></span>
-  <label class="labels">Enough waiters</label>
-  <span class="dot2"></span>
-  <label class="labels">Need more waiters</label>
-  <span class="dot3"></span>
-  <label class="labels">Too much waiters</label>
-</div>
-<div class="thedays">
-  <span class="{{colorMon}}">Monday</span>
-  <span class="{{colorTues}}">Tuesday</span>
-  <span class="{{colorWed}}">Wednesday</span>
-  <span class="{{colorThurs}}">Thursday</span>
-  <span class="{{colorFri}}">Friday</span>
-  <span class="{{colorSat}}">Saturday</span>
-  <span class="{{colorSun}}">Sunday</span>
-</div>
-</div>
 <form action="days" method="post">
 <div class="reset_update">
     <input type="submit" class="button-primary Reset" name="reset"  id="sizeLarge" value="Reset"/>
@@ -386,6 +372,46 @@ h1{
         {{/if}}
     </div>
     </span>
+<div class="grey">
+<div class="content">
+<div class="labelling">
+  <span class="dot"></span>
+  <label class="labels">Enough waiters</label>
+  <span class="dot2"></span>
+  <label class="labels">Need more waiters</label>
+  <span class="dot3"></span>
+  <label class="labels">Too much waiters</label>
+</div>
+
+  <div class="thedays">
+  <table>
+     <tr>
+        <td>
+  <span class="{{colorMon}}">Mon</span>
+       </td>
+        <td>
+  <span class="{{colorTues}}">Tues</span>
+       </td>
+        <td>
+  <span class="{{colorWed}}">Wed</span>
+       </td>
+        <td>
+  <span class="{{colorThurs}}">Thurs</span>
+       </td>
+        <td>
+  <span class="{{colorFri}}">Fri</span>
+       </td>
+                 <td>
+  <span class="{{colorSat}}">Sat</span>
+       </td>
+         <td>
+  <span class="{{colorSun}}">Sun</span>
+       </td>
+    </tr>
+  </table>
+</div>
+</div>
+</div>
   <div class="checkboxes">
     <table>
         {{#each allNames}}
