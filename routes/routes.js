@@ -243,12 +243,3 @@ module.exports = function waiterRoute(db, waitersFunction){
     }
 }
 
-/*    for (let i = 0; i < userCheckbox.length; i++) {
-      let userCheckbox2 = userCheckbox[i]
-          let object =
-              {names2,
-              userCheckbox2}
-
-            pushDays.push(object)
-
-       }*/
