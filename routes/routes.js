@@ -17,16 +17,16 @@ module.exports = function waiterRoute(db, waitersFunction){
 
 
       if (format.test(users) == true && wordCount.count == 0){
-      req.flash('code', 'Your login passcode is: ' + code)
+      req.flash('codeMessages', 'Your login passcode is: ' + code)
       await waitersFunction.registerAll(uppercase, code)
       res.redirect('/');
       }
       else if (format.test(users) == true && wordCount.count == 1){
-        req.flash('errors', 'You are registered')
+      req.flash('errorMessages', 'You are registered')
         res.redirect('/');
         }
       else if (format.test(users) == false){
-        req.flash('errors', 'Enter alphabets only')
+      req.flash('errorMessages', 'Enter alphabets only')
         res.redirect('/')
       }
     }
@@ -39,20 +39,18 @@ module.exports = function waiterRoute(db, waitersFunction){
       let userCode = req.body.fname
       let name = await db.oneOrNone('SELECT names FROM working_waiters WHERE code=$1', [userCode]) || {}
       let format = /^[A-Za-z]+$/
-      let upperName = name.names.toUpperCase()
+
       let storedCode = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE code=$1', [userCode])
 
-
-
       if (storedCode.count == 1 && name.names !== 'ADMIN'){
-
+      let upperName = name.names.toUpperCase()
       waitersFunction.loginNames(upperName)
       res.redirect(`/waiters/${upperName}`);
       }
       else if (storedCode.count == 1 && name.names == 'ADMIN'){
         res.redirect('/days');
         }
-      else if (storedCode.count == 0){
+      else if (storedCode.count == 0 || storedCode.count == undefined){
         req.flash('errors', 'Invalid passcode')
         res.redirect('/index');
         }
@@ -132,14 +130,30 @@ module.exports = function waiterRoute(db, waitersFunction){
           let = getDaysAdmin = await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1 ORDER BY waiter_id;', [arrayNames[i]])
 
           if(names2 !== 'ADMIN' && daysCount.count > 0){
-          let = resultDays = getDaysAdmin.map(a => a.working_days) || []
-          let = monday = !resultDays.includes(1) ? 'unchecked' : 'checked'
-          let = tuesday = !resultDays.includes(2) ? 'unchecked' : 'checked'
-          let = wednesday = !resultDays.includes(3) ? 'unchecked' : 'checked'
-          let = thursday = !resultDays.includes(4) ? 'unchecked' : 'checked'
-          let = friday = !resultDays.includes(5) ? 'unchecked' : 'checked'
-          let = saturday = !resultDays.includes(6) ? 'unchecked' : 'checked'
-          let = sunday = !resultDays.includes(7) ? 'unchecked' : 'checked'
+          let resultDays = getDaysAdmin.map(a => a.working_days) || []
+          let monday = !resultDays.includes(1) ? 'unchecked' : 'checked'
+          let tuesday = !resultDays.includes(2) ? 'unchecked' : 'checked'
+          let wednesday = !resultDays.includes(3) ? 'unchecked' : 'checked'
+          let thursday = !resultDays.includes(4) ? 'unchecked' : 'checked'
+          let friday = !resultDays.includes(5) ? 'unchecked' : 'checked'
+          let saturday = !resultDays.includes(6) ? 'unchecked' : 'checked'
+          let sunday = !resultDays.includes(7) ? 'unchecked' : 'checked'
+
+          let countMon = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [1])
+          let countTues = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [2])
+          let countWed = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1',[3])
+          let countThurs = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [4])
+          let countFri = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [5])
+          let countSat = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [6])
+          let countSun = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [7])
+
+          let colorMon = countMon.count < 3 ? "orange" : countMon.count == 3 ? "green" : countMon.count > 3 ? "red" : "orange";
+          let colorTues = countTues.count < 3 ? "orange" : countTues.count == 3 ? "green" : countTues.count > 3 ? "red" : "orange";
+          let colorWed = countWed.count < 3 ? "orange" : countWed.count == 3 ? "green" : countWed.count > 3 ? "red" : "orange";
+          let colorThurs = countThurs.count < 3 ? "orange" : countThurs.count == 3 ? "green" : countThurs.count > 3 ? "red" : "orange";
+          let colorFri = countFri.count < 3 ? "orange" : countFri.count == 3 ? "green" : countFri.count > 3 ? "red" : "orange";
+          let colorSat = countSat.count < 3 ? "orange" : countSat.count == 3 ? "green" : countSat.count > 3 ? "red" : "orange";
+          let colorSun = countSun.count < 3 ? "orange" : countSun.count == 3 ? "green" : countSun.count > 3 ? "red" : "orange";
 
           let res2 = {
             names2,
@@ -150,36 +164,20 @@ module.exports = function waiterRoute(db, waitersFunction){
             friday,
             saturday,
             sunday,
+            colorMon,
+            colorTues,
+            colorWed,
+            colorThurs,
+            colorFri,
+            colorSat,
+            colorSun
           }
           checkState.push(res2)
         }
       }
-        let countMon = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [1])
-        let countTues = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [2])
-        let countWed = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1',[3])
-        let countThurs = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [4])
-        let countFri = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [5])
-        let countSat = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [6])
-        let countSun = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [7])
-
-        let colorMon = countMon.count < 3 ? "orange" : countMon.count == 3 ? "green" : countMon.count > 3 ? "red" : "orange";
-        let colorTues = countTues.count < 3 ? "orange" : countTues.count == 3 ? "green" : countTues.count > 3 ? "red" : "orange";
-        let colorWed = countWed.count < 3 ? "orange" : countWed.count == 3 ? "green" : countWed.count > 3 ? "red" : "orange";
-        let colorThurs = countThurs.count < 3 ? "orange" : countThurs.count == 3 ? "green" : countThurs.count > 3 ? "red" : "orange";
-        let colorFri = countFri.count < 3 ? "orange" : countFri.count == 3 ? "green" : countFri.count > 3 ? "red" : "orange";
-        let colorSat = countSat.count < 3 ? "orange" : countSat.count == 3 ? "green" : countSat.count > 3 ? "red" : "orange";
-        let colorSun = countSun.count < 3 ? "orange" : countSun.count == 3 ? "green" : countSun.count > 3 ? "red" : "orange";
-
 
         res.render('days',{
           allNames: checkState,
-          colorMon,
-          colorTues,
-          colorWed,
-          colorThurs,
-          colorFri,
-          colorSat,
-          colorSun
         })
     }
 
@@ -197,28 +195,32 @@ module.exports = function waiterRoute(db, waitersFunction){
     }
 
    async function updateAdmin (req, res) {
-    let count = await db.manyOrNone('SELECT names FROM working_waiters')
+    let count = await db.manyOrNone('SELECT names FROM working_waiters WHERE names != $1', 'ADMIN')
     let names = count.map(a => a.names);
     let update;
+    let working;
+    let lengthOfDays = []
 
     for (let i = 0; i < names.length; i++) {
     let names2 = names[i]
     let storedNameID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", names2) || {}
     let user_id = storedNameID.id
     let userCheckbox = req.body[names[i]] || []
+    lengthOfDays.push(userCheckbox.length)
 
-    if(userCheckbox.length >= 3){
+    if(!lengthOfDays.includes(0) && !lengthOfDays.includes(1) && !lengthOfDays.includes(2)){
       await waitersFunction.usersForAdmin(user_id, userCheckbox)
       await waitersFunction.deleteAdmin(user_id, userCheckbox)
       await waitersFunction.insertValuesAdmin(user_id, userCheckbox)
-      update = 'Working days updated'
+      update = 'working days updated'
       }
-    else if(userCheckbox.length < 3){
-      update = ''
-      }
+    else if (lengthOfDays.includes(0) || lengthOfDays.includes(1) || lengthOfDays.includes(2)){
+      working =  'add 3 or more working days'
+
+    }
     }
     req.flash('update', update)
-
+    req.flash('errors', working)
     res.redirect('/days')
       }
 

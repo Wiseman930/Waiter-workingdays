@@ -2,11 +2,11 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
-const flash = require("express-flash");
-const session = require("express-session");
 const app = express();
 const myFunction = require('./waiters')
 const pgp = require("pg-promise")();
+const flash = require("express-flash");
+const session = require("express-session");
 
 
 
@@ -19,9 +19,9 @@ const DATABASE_URL = process.env.DATABASE_URL || "postgresql://postgres:pg1999@l
 
 const config = {
   connectionString: DATABASE_URL,
- /*ssl: {
+ ssl: {
     rejectUnauthorized: false,
-  },*/
+  },
 };
 
 const db = pgp(config);
@@ -33,15 +33,16 @@ const myDays = require('./routes/routes')
 const thedays = myDays(db, waitersFunction)
 
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 app.use(
     session({
-      secret: "string for session in http",
+      secret: 'this is my long String that is used for session in http',
       resave: false,
       saveUninitialized: true,
     })
   );
   app.use(flash());
-  app.set("view engine", "handlebars");
   app.use(express.static("public"));
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());

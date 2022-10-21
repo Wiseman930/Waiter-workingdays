@@ -14,8 +14,7 @@ h1{
     margin: 0%;
     padding-top: 15px;
     padding-bottom: 15px;
-    transform: translateX(15px);
-
+    text-align: center;
 }
 
 .center{
@@ -33,35 +32,41 @@ h1{
   width: 40px;
   height: 40px;
   margin-top: 30px;
-  transform: translateX(-350px);
   padding-bottom: 25px;
 }
 .div {
   text-align: center;
+  margin: auto;
 }
 .heads{
   background-color: #fca311;
+  display:grid;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 .home{
-  transform: translateX(-350px);
   background-color: #e5e5e5;
   border-color: #000000;
   border-radius: 8px;
   color: #000000;
   padding: 12px;
+  margin: auto;
 }
 .admin{
-  transform: translateX(350px);
   background-color: #e5e5e5;
   border-color: #000000;
   border-radius: 8px;
   color: #000000;
   padding: 12px;
+  margin: auto;
+}
+.tittle{
+  margin: auto;
 }
 .Main{
     text-align: center;
     font-size: large;
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 .log{
   padding-left: 30px;
@@ -136,52 +141,33 @@ h1{
   }
   .errorMessages{
     text-align: center;
-    padding-top: 25px ;
     color: #a4161a;
     font-size: 30px;
     font-weight: 700;
-    animation: hideAnimation 0s ease-in 4s;
-    animation-fill-mode: forwards;
+    animation: hideAnimation 0s ease-in 5s;
+   animation-fill-mode: forwards;
+
   }
   .updateMessages{
     text-align: center;
-    padding-top: 25px ;
     color: green;
     font-size: 30px;
     font-weight: 700;
-    animation: hideAnimation 0s ease-in 4s;
-    animation-fill-mode: forwards;
-    transform: translateY(-40px) translateX(0px);
+    animation: hideAnimation 0s ease-in 5s;
+   animation-fill-mode: forwards;
   }
   .codeMessages{
     text-align: center;
-    padding-top: 25px ;
     color: green;
     font-size: 30px;
     font-weight: 700;
-    animation: hideAnimation 0s ease-in 15s;
+    animation: hideAnimation 0s ease-in 10s;
     animation-fill-mode: forwards;
   }
   table, th, td {
     margin: auto;
     text-align: left;
   }
-  @keyframes blink {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 5;
-    }
-}
-.center {
-    animation: blink 3s;
-    animation-iteration-count: infinite;
-}
-
   @keyframes hideAnimation {
     to {
       visibility: hidden;
@@ -189,3 +175,5 @@ h1{
       height: 0;
     }
   }
+
+

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/path/to/flash.min.js"></script>
+    <script src="/client.js"></script>
     <title>Document</title>
 </head>
 <style>
@@ -33,31 +35,31 @@ h1{
     margin: 0%;
     padding-top: 15px;
     padding-bottom: 15px;
-    transform: translateX(-50px);
 }
 .center3{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 40px;
-  height: 40px;
-  margin-top: 20px;
-  transform: translateX(350px);
-  padding-bottom: 25px;
+}
+.log_home{
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .heads{
   background-color: #fca311;
+  display:grid;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 .home{
-  transform: translateX(-350px);
   background-color: #e5e5e5;
   border-color: #000000;
   border-radius: 8px;
   color: #000000;
   padding: 12px;
+  margin: 2px;
 }
 .admin{
-  transform: translateX(350px);
   background-color: #e5e5e5;
   border-color: #000000;
   border-radius: 8px;
@@ -111,62 +113,7 @@ h1{
 #fname{
     height: 35px;
 }
-.weekDays-selector{
-    padding-top: 80px;
-    text-align: center;
 
-
-}
-.weekDays-selector input {
-    display: none!important;
-
-  }
-
-  .weekDays-selector input[type=checkbox] + label {
-    display: inline-block;
-    border-radius: 6px;
-    background: #e5e5e5;
-    height: 40px;
-    width: 70px;
-    padding: 15px;
-    margin-right: 3px;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-    font-size:smaller;
-
-  }
-
-  .weekDays-selector input[type=checkbox]:checked + label {
-    background: #0b090a;
-    color: #ffffff;
-  }
-.weekDays-selector2{
-    padding-top: 45px;
-    text-align: center;
-}
-.weekDays-selector2 input {
-    display: none!important;
-
-  }
-  .weekDays-selector2 input[type=checkbox] + label {
-    display: inline-block;
-    border-radius: 6px;
-    background: #e5e5e5;
-    height: 25px;
-    width: 40px;
-    padding: 10px;
-    margin-right: 3px;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-    font-size:small;
-  }
-
-  .weekDays-selector2 input[type=checkbox]:checked + label {
-    background: #0b090a;
-    color: #ffffff;
-  }
   h2{
     text-align: center;
   }
@@ -185,7 +132,6 @@ h1{
     font-weight: 700;
     animation: hideAnimation 0s ease-in 4s;
     animation-fill-mode: forwards;
-    transform: translateY(-20px) translateX(0px);
   }
   table, th, td {
     margin: auto;
@@ -217,7 +163,7 @@ h1{
   border-radius: 50%;
   display:block;
   padding: 8px;
-  margin: 5.5px;
+  margin: 2px;
 }
 
 .labelling{
@@ -226,6 +172,7 @@ h1{
  grid-template-columns: 1fr 3.5fr 1fr 3.5fr 1fr 3.5fr;
  font-family: Copperplate,Copperplate Gothic Light,fantasy;
  margin: auto;
+ padding: 10px;
 
 }
 .thedays{
@@ -248,43 +195,35 @@ h1{
   text-align: center
 }
 .green {
-  height: 25px;
-  width: 25px;
   background-color: green;
   border-radius: 10px;
   display:block;
   padding: 8px;
   padding-top: 16px;
   margin: 2px;
-  width: 60px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   text-align: center;
   color: antiquewhite;
 }
+
 .orange {
-  height: 25px;
-  width: 25px;
   background-color: orange;
   border-radius: 10px;
   display:block;
   padding: 8px;
   padding-top: 16px;
-  margin: 2px;
-  width: 60px;
+  margin: 3px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   text-align: center;
   color: black;
 }
 .red {
-  height: 25px;
-  width: 25px;
   background-color: red;
-  border-radius: 10px;
+  border-radius: 8px;
   display:block;
   padding: 8px;
   padding-top: 16px;
   margin: 2px;
-  width: 60px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   text-align: center;
   color: antiquewhite;
@@ -293,7 +232,8 @@ h1{
  display:grid;
  background-color: #e5e5e5;
  width: fit-content;
- text-align: center;
+ margin-bottom: 30px;
+ margin-top: 30px;
 }
 .grey{
   display: flex;
@@ -327,29 +267,22 @@ h1{
       height: 0;
     }
   }
+
 </style>
 <body>
-
-    <div class="heads">
-    <table>
-        <tr>
-            <td>
-        <div class="home"><a href="/"> Home </a></div>
-            </td>
-            <td>
-                <div class="home"><a href="/index"> Login </a></div>
-            </td>
-            <td>
-            <h1>Waiter Availability</h1>
-            </td>
-            <td>
-                 <div class="div">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2316/2316884.png" alt="no image"class="center3">
+            <div class="heads">
+                    <div class="div_icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2316/2316884.png" alt="no image" class="center2">
                     </div>
-            </td>
-        </tr>
-    </table>
-    </div>
+                      <div class="tittle">
+                        <h1>Waiter Availability</h1>
+                    </div>
+                    <div class="log_home">
+                        <div class="home"><a href="/index"> Login </a></div>
+                        <div class="home"><a href="/"> Home </a></div>
+                    </div>
+            </div>
+
 <form action="days" method="post">
 <div class="reset_update">
     <input type="submit" class="button-primary Reset" name="reset"  id="sizeLarge" value="Reset"/>
@@ -374,42 +307,14 @@ h1{
     </span>
 <div class="grey">
 <div class="content">
-<div class="labelling">
-  <span class="dot"></span>
-  <label class="labels">Enough waiters</label>
-  <span class="dot2"></span>
-  <label class="labels">Need more waiters</label>
-  <span class="dot3"></span>
-  <label class="labels">Too much waiters</label>
-</div>
-
-  <div class="thedays">
-  <table>
-     <tr>
-        <td>
-  <span class="{{colorMon}}">Mon</span>
-       </td>
-        <td>
-  <span class="{{colorTues}}">Tues</span>
-       </td>
-        <td>
-  <span class="{{colorWed}}">Wed</span>
-       </td>
-        <td>
-  <span class="{{colorThurs}}">Thurs</span>
-       </td>
-        <td>
-  <span class="{{colorFri}}">Fri</span>
-       </td>
-                 <td>
-  <span class="{{colorSat}}">Sat</span>
-       </td>
-         <td>
-  <span class="{{colorSun}}">Sun</span>
-       </td>
-    </tr>
-  </table>
-</div>
+  <div class="labelling">
+    <span class="dot"></span>
+    <label class="labels">Enough waiters</label>
+    <span class="dot2"></span>
+    <label class="labels">Need more waiters</label>
+    <span class="dot3"></span>
+    <label class="labels">Too much waiters</label>
+  </div>
 </div>
 </div>
   <div class="checkboxes">
@@ -421,32 +326,32 @@ h1{
             </td>
             <td>
               <div class="checks">
-              <div class="weekday">
-                <input type="checkbox" id="weekday-mon" class="weekday" name="{{names2}}" value=1 {{monday}} />
+              <div class="{{colorMon}}">
+                <input type="checkbox" id="weekday-mon" class="" name="{{names2}}" value=1 {{monday}} />
                 <label for="weekday-mon">Mon</label>
               </div>
-              <div class="weekday">
-                <input type="checkbox" id="weekday-tue" class="weekday" name="{{names2}}" value=2 {{tuesday}} />
+              <div class="{{colorTues}}">
+                <input type="checkbox" id="weekday-tue" class="" name="{{names2}}" value=2 {{tuesday}} />
                 <label for="weekday-tue">Tues</label>
               </div>
-                <div class="weekday">
-                <input type="checkbox" id="weekday-wed" class="weekday" name="{{names2}}" value=3 {{wednesday}} />
+                <div class="{{colorWed}}">
+                <input type="checkbox" id="weekday-wed" class="" name="{{names2}}" value=3 {{wednesday}} />
                 <label for="weekday-wed">Wed</label>
                  </div>
-                <div class="weekday">
-                <input type="checkbox" id="weekday-thu" class="weekday" name="{{names2}}" value=4 {{thursday}} />
+                <div class="{{colorThurs}}">
+                <input type="checkbox" id="weekday-thu" class="" name="{{names2}}" value=4 {{thursday}} />
                 <label for="weekday-thu">Thurs</label>
                  </div>
-                <div class="weekday">
-                <input type="checkbox" id="weekday-fri" class="weekday" name="{{names2}}" value=5 {{friday}} />
+                <div class="{{colorFri}}">
+                <input type="checkbox" id="weekday-fri" class="" name="{{names2}}" value=5 {{friday}} />
                 <label for="weekday-fri">Fri</label>
                  </div>
-                <div class="weekday">
-                <input type="checkbox" id="weekday-sat" class="weekday" name="{{names2}}" value=6 {{saturday}} />
+                <div class="{{colorSat}}">
+                <input type="checkbox" id="weekday-sat" class="" name="{{names2}}" value=6 {{saturday}} />
                 <label for="weekday-sat">Sat</label>
                  </div>
-                <div class="weekday">
-                <input type="checkbox" id="weekday-sun" class="weekday" name="{{names2}}" value=7 {{sunday}}/>
+                <div class="{{colorSun}}">
+                <input type="checkbox" id="weekday-sun" class="" name="{{names2}}" value=7 {{sunday}}/>
                 <label for="weekday-sun">Sun</label>
                  </div>
                 </div>
