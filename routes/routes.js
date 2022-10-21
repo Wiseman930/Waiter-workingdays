@@ -91,8 +91,8 @@ module.exports = function waiterRoute(db, waitersFunction){
       });
     }
     else if(storedName.count == 0){
-      req.flash('errors', "Register the user first")
       res.redirect('/')
+      req.flash('errors', "Register first")
     }
 
     }
@@ -199,22 +199,28 @@ module.exports = function waiterRoute(db, waitersFunction){
     let names = count.map(a => a.names);
     let update;
     let working;
-    let lengthOfDays = []
+    let arr2 = []
 
     for (let i = 0; i < names.length; i++) {
     let names2 = names[i]
     let storedNameID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", names2) || {}
     let user_id = storedNameID.id
     let userCheckbox = req.body[names[i]] || []
-    lengthOfDays.push(userCheckbox.length)
 
-    if(!lengthOfDays.includes(0) && !lengthOfDays.includes(1) && !lengthOfDays.includes(2)){
+
+    let lessDays = Array.from(Array(3).keys())
+    arr2.push(userCheckbox.length)
+    const founddays = lessDays.some(r=> arr2.includes(r))
+
+
+    if(founddays == false){
+
       await waitersFunction.usersForAdmin(user_id, userCheckbox)
       await waitersFunction.deleteAdmin(user_id, userCheckbox)
       await waitersFunction.insertValuesAdmin(user_id, userCheckbox)
       update = 'working days updated'
       }
-    else if (lengthOfDays.includes(0) || lengthOfDays.includes(1) || lengthOfDays.includes(2)){
+    else if (founddays == true){
       working =  'add 3 or more working days'
 
     }
