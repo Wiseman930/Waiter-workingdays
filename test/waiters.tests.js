@@ -1,4 +1,4 @@
-/*const assert = require('assert');
+const assert = require('assert');
 const waiterDays = require('../waiters');
 const pgp = require('pg-promise')();
 
@@ -445,4 +445,4 @@ it("Admin cannot add/insert same day twice into database", async function(){
         });
 
 
-});*/
+});
