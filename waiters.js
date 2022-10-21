@@ -1,7 +1,7 @@
 module.exports = function waitersWorking(db){
 
    async function deleteAll(){
-    await db.none('DELETE FROM working_waiters WHERE names!=$1;', 'ADMIN');
+    await db.none('DELETE FROM working_waiters WHERE;',);
     await db.none('DELETE FROM available_days;');
     return await db.manyOrNone('SELECT working_days FROM available_days')
   }
