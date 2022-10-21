@@ -51,4 +51,4 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     env:
-      DATABASE_URL: postgresql://postgres:pg1999@localhost:5432/waiter
+      DATABASE_URL: postgresql://postgres:pg1999@localhost:5432/test
