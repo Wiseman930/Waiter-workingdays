@@ -14,7 +14,7 @@ const db = pgp(config);
 describe('Waiters function for users', function(){
 
     beforeEach(async function(){
-   await db.none('DELETE FROM working_waiters WHERE names != $1;', 'ADMIN');
+   await db.none('DELETE FROM working_waiters;');
    await db.none('DELETE FROM available_days;');
 
     });
