@@ -222,6 +222,7 @@ module.exports = function waiterRoute(db, waitersFunction){
       }
     else if (founddays == true){
       working =  'add 3 or more working days'
+      update = ''
 
     }
     }
