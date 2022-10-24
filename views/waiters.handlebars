@@ -10,9 +10,18 @@
     <title>Document</title>
     <style>
    body{
-    margin: 0%;
-    background-color: #ffffff;
-    font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  margin: 0%;
+  background-color: #ffffff;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  background-image: url('https://images.pexels.com/photos/4349746/pexels-photo-4349746.jpeg?cs=srgb&dl=pexels-ketut-subiyanto-4349746.jpg&fm=jpg&_gl=1*o3roo6*_ga*MTk0OTcyNzIxNi4xNjY1MTk0Nzk0*_ga_8JE65Q40S6*MTY2NjU2NDM4NC42LjEuMTY2NjU2NDY4NS4wLjAuMA..');
+  text-align: center;
+  margin: 0%;
+  margin-top: 0%;
+  text-align: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
 }
 .update{
   text-align: center;
@@ -20,17 +29,30 @@
   margin-bottom: 30px;
 }
 .heads{
-  background-color: #fca311;
+  background: rgba(229, 229, 229, .6);
   display:grid;
   grid-template-columns: 1fr 2fr 1fr;
+  padding-top: 15px;
 }
+.waiterSection{
+  background: rgba(229, 229, 229, .6);
+  width: max-content;
+  padding: 10px;
+  margin-top: 40px;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+a { color: #000000; }
 .home{
   background-color: #e5e5e5;
   border-color: #000000;
-  border-radius: 8px;
+  border-radius: 0px;
   color: #000000;
   padding: 12px;
   margin: 2px;
+  border-style: solid;
+  border-width: 1px;
 }
 
 h1{
@@ -39,6 +61,7 @@ h1{
     padding-top: 15px;
     padding-bottom: 15px;
     text-align: center;
+    font-size: 25px
 }
 .center3{
   display: block;
@@ -59,12 +82,6 @@ h1{
     font-size: x-large;
     margin-top: 260px;
 }
-.heads{
-  background-color: #fca311;
-  display:grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  padding-top: 15px;
-}
 .log{
     padding-left: 30px;
     padding-right: 30px;
@@ -75,6 +92,7 @@ h1{
     border-color: #000000;
     color: #000000;
     border-radius: 8px;
+    font-family: Copperplate,Copperplate Gothic Light,fantasy;
 }
 #fname{
     height: 35px;
@@ -109,22 +127,27 @@ h1{
   h2{
     text-align: center;
     font-size: large;
+    color: #000000;
   }
   .errorMessages{
     text-align: center;
-    color: #a4161a;
+    color: #D22B2B;
     font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 4s;
     animation-fill-mode: forwards;
+    font-size: 20px;
+     font-weight: 600;
   }
 .updateMessages{
     text-align: center;
-    color: green;
+    color: #4e784f;
     font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 4s;
     animation-fill-mode: forwards;
+    font-size: 20px;
+    font-weight: 600;
 
   }
   table, th, td {
@@ -157,8 +180,24 @@ h1{
       </div>
  </div>
 
+<div class="waiterSection">
+{{#each alldays}}
 <h2>{{registerName}} please select and update your working days</h2>
+{{/each}}
+  <br>
+      <div class="errorMessages">
+        {{#if messages.errors}}
+        <span>{{messages.errors}}</span>
+        {{/if}}
+    </div>
+  <div class="updateMessages">
+        {{#if messages.update}}
+        <span>{{messages.update}}</span>
+        {{/if}}
+    </div>
+</div>
 
+{{#each alldays}}
 <form action="{{registerName}}" method="post">
 <div class="weekDays-selector">
     <input type="checkbox" id="weekday-mon" class="weekday" name="weekday" value=1 {{mon}} />
@@ -180,17 +219,7 @@ h1{
     <input type="submit" class="log" name="fontSizeControl"  id="sizeLarge" value="Update"/>
 </div>
 </form>
-    <div class="errorMessages">
-        {{#if messages.errors}}
-        <span>{{messages.errors}}</span>
-        {{/if}}
-    </div>
-  <div class="updateMessages">
-        {{#if messages.update}}
-        <span>{{messages.update}}</span>
-        {{/if}}
-    </div>
-
+{{/each}}
 </body>
 
 </html>

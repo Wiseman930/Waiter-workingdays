@@ -11,8 +11,16 @@
 <style>
     body{
     margin: 0%;
-    background-color: #ffffff;
     font-family: Copperplate,Copperplate Gothic Light,fantasy;
+    background-image: url('https://images.pexels.com/photos/4349746/pexels-photo-4349746.jpeg?cs=srgb&dl=pexels-ketut-subiyanto-4349746.jpg&fm=jpg&_gl=1*o3roo6*_ga*MTk0OTcyNzIxNi4xNjY1MTk0Nzk0*_ga_8JE65Q40S6*MTY2NjU2NDM4NC42LjEuMTY2NjU2NDY4NS4wLjAuMA..');
+    text-align: center;
+    margin: 0%;
+    margin-top: 0%;
+    text-align: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
 }
 .update{
   text-align: center;
@@ -22,11 +30,15 @@
 .reset_update{
   text-align: center;
   margin-top: 30px;
+  margin-left: 500px;
+  margin-bottom: 10px;
 
 }
 .admin_user{
   text-align: center;
   margin-top: 30px;
+  margin-right: 500px;
+  margin-bottom: 10px;
 
 }
 
@@ -35,6 +47,7 @@ h1{
     margin: 0%;
     padding-top: 15px;
     padding-bottom: 15px;
+    font-size: 25px
 }
 .center3{
   display: block;
@@ -45,24 +58,27 @@ h1{
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
+
 }
 .heads{
-  background-color: #fca311;
+  background: rgba(229, 229, 229, .6);
   display:grid;
   grid-template-columns: 1fr 2fr 1fr;
 }
 .home{
   background-color: #e5e5e5;
   border-color: #000000;
-  border-radius: 8px;
+  border-radius: 0px;
   color: #000000;
   padding: 12px;
   margin: 2px;
+  border-style: solid;
+  border-width: 1px;
 }
 .admin{
   background-color: #e5e5e5;
   border-color: #000000;
-  border-radius: 8px;
+  border-radius: 0px;
   color: #000000;
   padding: 12px;
 }
@@ -92,9 +108,12 @@ h1{
   border-color: #000000;
   color: #000000;
   border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
   width: 120px;
   height: 40px;
-  transform: translateY(30px) translateX(-90px);
+  font-weight: 500;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
 }
 .Update{
   padding-left: 30px;
@@ -106,9 +125,12 @@ h1{
   border-color: #000000;
   color: #000000;
   border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
   width: 120px;
   height: 40px;
-  transform: translateY(-40px) translateX(90px);
+  font-weight: 500;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
 }
 #fname{
     height: 35px;
@@ -119,61 +141,85 @@ h1{
   }
   .errorMessages{
     text-align: center;
-    color: #a4161a;
+    color: #D22B2B;
     font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 4s;
     animation-fill-mode: forwards;
+    background: rgba(255, 255, 255, .0);
+    font-size: 24px;
+    font-weight: 600;
+
   }
 .updateMessages{
     text-align: center;
-    color: green;
+    color: #4e784f;
     font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 4s;
     animation-fill-mode: forwards;
+    background: rgba(255, 255, 255, .0);
+    font-size: 24px;
+    font-weight: 600;
+
   }
   table, th, td {
     margin: auto;
     text-align: left;
   }
   .dot {
-  height: 25px;
-  width: 25px;
-  background-color: green;
-  border-radius: 50%;
+  height: auto;
+
+  background-color: #4e784f;
+  background: rgba(78,120,79, .6);
+  border-radius: 8px;
   display:block;
   padding: 8px;
   margin: 2px;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #4e784f;
+  margin: auto;
+  font-weight: 60px;
 
 }
 .dot2 {
-  height: 25px;
-  width: 25px;
-  background-color: orange;
-  border-radius: 50%;
-  display:block;
-  padding: 8px;
-  margin: 2px
-}
-.dot3 {
-  height: 25px;
-  width: 25px;
-  background-color: red;
-  border-radius: 50%;
+  height: auto;
+  width: fit-content;
+  background-color: #fe6601;
+  background: rgba(254, 102, 1, .6);
+  border-radius: 8px;
   display:block;
   padding: 8px;
   margin: 2px;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #fe6601;
+  margin: auto;
+  font-weight: 60px;
 }
-
+.dot3 {
+  height: auto;
+  width: fit-content;
+  background-color: #D22B2B;
+  background: rgba(210, 43, 43, .6);
+  border-radius: 8px;
+  display:block;
+  padding: 8px;
+  margin: 2px;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #D22B2B;
+  margin: auto;
+  font-weight: 60px;
+}
 .labelling{
  border-color: #000000;
  display:grid;
- grid-template-columns: 1fr 3.5fr 1fr 3.5fr 1fr 3.5fr;
+ grid-template-columns: 4fr 4fr 4fr;
  font-family: Copperplate,Copperplate Gothic Light,fantasy;
  margin: auto;
  padding: 10px;
-
 }
 .thedays{
  border-color: #000000;
@@ -195,71 +241,118 @@ h1{
   text-align: center
 }
 .green {
-  background-color: green;
-  border-radius: 10px;
+  background-color: #4e784f;
+  border-radius: 8px;
+  border-color: #000000;
   display:block;
-  padding: 8px;
-  padding-top: 16px;
+  padding: 10px;
   margin: 2px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   text-align: center;
   color: antiquewhite;
+  border-style: solid;
+  border-width: 0px;
 }
 
 .orange {
-  background-color: orange;
-  border-radius: 10px;
+  background-color: #fe6601;
+  border-radius: 8px;
+  border-color: #000000;
   display:block;
-  padding: 8px;
-  padding-top: 16px;
-  margin: 3px;
+  padding: 10px;
+  margin: 2px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   text-align: center;
-  color: black;
+  color: #000000;
+  border-style: solid;
+  border-width: 0px;
 }
-.red {
-  background-color: red;
+.red
+{
+  background-color: #D22B2B;
   border-radius: 8px;
+  border-color: #000000;
   display:block;
-  padding: 8px;
-  padding-top: 16px;
+  padding: 10px;
   margin: 2px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   text-align: center;
   color: antiquewhite;
+  border-style: solid;
+  border-width: 0px;
+}
+.days
+{
+  background-color: #e5e5e5;
+  border-radius: 8px;
+  border-color: #000000;
+  display:block;
+  padding: 10px;
+  margin: 2px;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  text-align: center;
+  color: #000000;
+  border-style: solid;
+  border-width: 1px;
+
 }
 .content{
  display:grid;
- background-color: #e5e5e5;
+background: rgba(229, 229, 229, .6);
  width: fit-content;
  margin-bottom: 30px;
  margin-top: 30px;
+ border-radius: 8px;
 }
 .grey{
-  display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
+  margin: auto;
 }
 
 .weekday{
  background: #e5e5e5;
-    color: #000000;
-    margin: 5px;
-    border-radius: 8px;
-    border-color: #000000;
-    padding: 5px;
-    font-size: small;
+  color: #000000;
+  margin: 5px;
+  border-radius: 8px;
+  border-color: #000000;
+  padding: 5px;
+  font-size: small;
 }
 .checks{
   display:grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-.checkboxes{
-  padding-top: 0px;
+.allmydays{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin: auto;
+  padding: 8px;
 }
 .labels{
-   transform: translateY(15px);
+ justify-items: center;
 }
+p{
+  color: #000000;
+}
+.mybuttons{
+  display:grid;
+  grid-template-columns: 1fr 1fr ;
+}
+.allContent{
+  display: flex;
+	flex-flow: column wrap;
+}
+.checkboxes{
+   background: rgba(229, 229, 229, .5);
+   width: fit-content;
+   margin: auto;
+   border-radius: 8px;
+   padding: 10px;
+
+}
+a { color: #000000; }
   @keyframes hideAnimation {
     to {
       visibility: hidden;
@@ -270,19 +363,21 @@ h1{
 
 </style>
 <body>
-            <div class="heads">
-                    <div class="div_icon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2316/2316884.png" alt="no image" class="center2">
-                    </div>
-                      <div class="tittle">
-                        <h1>Waiter Availability</h1>
-                    </div>
-                    <div class="log_home">
-                        <div class="home"><a href="/index"> Login </a></div>
-                        <div class="home"><a href="/"> Home </a></div>
-                    </div>
-            </div>
+  <div class="allContent">
+      <div class="heads">
+          <div class="div_icon">
+              <img src="https://cdn-icons-png.flaticon.com/512/2316/2316884.png" alt="no image" class="center2">
+          </div>
+            <div class="tittle">
+              <h1>Waiter Availability</h1>
+          </div>
+          <div class="log_home">
+              <div class="home"><a href="/index"> Login </a></div>
+              <div class="home"><a href="/"> Home </a></div>
+          </div>
+      </div>
 
+<div class="mybuttons">
 <form action="days" method="post">
 <div class="reset_update">
     <input type="submit" class="button-primary Reset" name="reset"  id="sizeLarge" value="Reset"/>
@@ -293,36 +388,44 @@ h1{
   <div class="admin_user">
   <input type="submit" class="button-primary Update" name="update"  id="sizeLarge" value="Update"/>
 </div>
-    <span>
-    <div class="errorMessages">
-        {{#if messages.errors}}
-        {{messages.errors}}
-        {{/if}}
-    </div>
-    <div class="updateMessages">
-        {{#if messages.update}}
-        <span>{{messages.update}}
-        {{/if}}
-    </div>
-    </span>
-<div class="grey">
-<div class="content">
-  <div class="labelling">
-    <span class="dot"></span>
-    <label class="labels">Enough waiters</label>
-    <span class="dot2"></span>
-    <label class="labels">Need more waiters</label>
-    <span class="dot3"></span>
-    <label class="labels">Too much waiters</label>
-  </div>
 </div>
+
+<div class="grey">
+  <div class="content">
+    <div class="labelling">
+      <div class="greenG">
+      <span class="dot">Enough waiters</span>
+      <label class="labels"></label>
+      </div>
+      <div class="orangeG">
+      <span class="dot2">Waiters needed</span>
+      <label class="labels"></label>
+      </div>
+      <div class="redG">
+      <span class="dot3">Too much waiters</span>
+      <label class="labels"></label>
+      </div>
+    </div>
+          <div class="twoMessages">
+          <div class="errorMessages">
+          {{#if messages.errors}}
+          {{messages.errors}}
+          {{/if}}
+        </div>
+        <div class="updateMessages">
+          {{#if messages.update}}
+          {{messages.update}}
+          {{/if}}
+        </div>
+   </div>
+    </div>
 </div>
   <div class="checkboxes">
     <table>
         {{#each allNames}}
         <tr>
             <td>
-                {{names2}}
+                <p>{{names2}}</p>
             </td>
             <td>
               <div class="checks">
@@ -362,5 +465,6 @@ h1{
     </table>
   </div>
 </form>
+</div>
 </body>
 </html>

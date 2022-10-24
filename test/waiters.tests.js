@@ -248,8 +248,54 @@ it("a worker cannot add the same day twice in the database table", async functio
     });
 
 
+    it("Worker should be able to see checked and unchecked days", async function(){
+        let waiters = waiterDays(db);
+        let uid = new shortCode({length: 6});
+        let code = uid()
 
+        await waiters.registerAll("JONAS", code);
+        assert.deepEqual({
+            code: code,
+            names: 'JONAS'
+        }, await waiters.returnRegistered());
+        await waiters.waiterUpdate('JONAS')
+        await waiters.loginNames("JONAS", ['1','4', '4', '5']);
+        await waiters.getNames("JONAS", ['1','4', '4', '5']);
+
+        assert.deepEqual([
+            {
+              fri: 'unchecked',
+              mon: 'unchecked',
+              registerName: 'JONAS',
+              sat: 'unchecked',
+              sun: 'unchecked',
+              thurs: 'unchecked',
+              tue: 'unchecked',
+              wed: 'unchecked'
+            }
+          ], await waiters.getWaiterDays("JONAS"));
+
+          await waiters.waiterUpdate('JONAS')
+          await waiters.loginNames("JONAS", ['1', '3', '7']);
+          await waiters.getNames("JONAS", ['1', '3', '7']);
+
+          assert.deepEqual([
+              {
+                fri: 'checked',
+                mon: 'checked',
+                registerName: 'JONAS',
+                sat: 'unchecked',
+                sun: 'unchecked',
+                thurs: 'checked',
+                tue: 'unchecked',
+                wed: 'unchecked'
+              }
+            ], await waiters.getWaiterDays("JONAS"));
+
+        });
 });
+
+
 
 
 describe('Waiters function for Admin', function(){
@@ -444,5 +490,43 @@ it("Admin cannot add/insert same day twice into database", async function(){
 
         });
 
+
+it("Admin should be able to see checked and unchecked days, and wether there is enough subcription for each day", async function(){
+            let waiters = waiterDays(db);
+            let uid = new shortCode({length: 6});
+            let code = uid()
+
+            await waiters.registerAll("JONAS", code);
+            assert.deepEqual({
+                code: code,
+                names: 'JONAS'
+            }, await waiters.returnRegistered());
+            let ID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", ['JONAS'])
+
+            await waiters.usersForAdmin(ID.id, ['1','4', '4', '5']);
+            await waiters.deleteAdmin(ID.id, ['1','4', '4', '5']);
+
+            assert.deepEqual([
+                {
+                  colorFri: 'orange',
+                  colorMon: 'orange',
+                  colorSat: 'orange',
+                  colorSun: 'orange',
+                  colorThurs: 'orange',
+                  colorTues: 'orange',
+                  colorWed: 'orange',
+                  friday: 'checked',
+                  monday: 'checked',
+                  names2: 'JONAS',
+                  saturday: 'unchecked',
+                  sunday: 'unchecked',
+                  thursday: 'checked',
+                  tuesday: 'unchecked',
+                  wednesday: 'unchecked'
+                }
+              ], await waiters.renderAdmin());
+
+
+            });
 
 });

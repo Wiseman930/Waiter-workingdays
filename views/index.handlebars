@@ -10,28 +10,21 @@
     <script src="/client.js"></script>
     <title>Document</title>
 </head>
-
 <body>
-           <div class="heads">
-
-                    <div class="div_icon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2316/2316884.png" alt="no image" class="center2">
-                    </div>
-                    <div class="tittle">
-                        <h1>Waiter Availability</h1>
-                    </div>
-                    <div class="admin">
-                        <a href="/"> Home </a>
-                    </div>
-    </div>
-    </div>
+    <div class="heads">
+                <div class="div_icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2316/2316884.png" alt="no image" class="center2">
+                </div>
+                <div class="tittle">
+                    <h1>Waiter Availability</h1>
+                </div>
+                <div class="admin">
+                    <a href="/"> Home </a>
+                </div>
+        </div>
+<div class="allContent">
     <div class="div">
-        <img src="https://cdn-icons-png.flaticon.com/512/2356/2356900.png" alt="no image" class="center">
     </div>
-    <h5>Note:<br>
-    <br>
-    Login using the passcode
-    </h5>
     <form action="waiter" method="post">
         <div class="Main">
             <label for="sizeLarge"></label>
@@ -40,12 +33,17 @@
             <input type="submit" class="log" name="fontSizeControl" id="sizeLarge" value="Login"/>
         </div>
     </form>
-    <div class="errorMessages">
+    <h4>Note:<br>
+    <br>
+    Login using the passcode from the registration page
+    <br>
+      <div class="errorMessages">
         {{#if messages.errors}}
         <span>{{messages.errors}}</span>
         {{/if}}
     </div>
-
+    </h4>
+</div>
 </body>
 
 </html>

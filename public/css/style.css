@@ -1,32 +1,36 @@
 body{
-    margin: 0%;
-    background-color: #ffffff;
-    font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  margin: 0%;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  background-image: url('https://images.pexels.com/photos/4349746/pexels-photo-4349746.jpeg?cs=srgb&dl=pexels-ketut-subiyanto-4349746.jpg&fm=jpg&_gl=1*o3roo6*_ga*MTk0OTcyNzIxNi4xNjY1MTk0Nzk0*_ga_8JE65Q40S6*MTY2NjU2NDM4NC42LjEuMTY2NjU2NDY4NS4wLjAuMA..');
+  text-align: center;
+  margin: 0%;
+  margin-top: 0%;
+  text-align: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
 }
 .update{
   text-align: center;
   margin-top: 30px;
 }
-
-
 h1{
-    color: #000000;
-    margin: 0%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    text-align: center;
+  color: #000000;
+  margin: 0%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 25px
 }
-h5{
-  background-color: #e5e5e5;
+h4{
+  background: rgba(229, 229, 229, .7);
   padding: 10px;
   text-align: center;
   width: fit-content;
   border-radius: 8px;
   margin: auto;
-  margin-top: 30px;
-  font-size: small;
+  font-size: 16px;
 }
-
 .center{
   display: block;
   margin-left: auto;
@@ -35,7 +39,8 @@ h5{
   height: 210px;
   margin-top: 30px;
 }
-.center2{
+.center2
+{
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -49,33 +54,40 @@ h5{
   margin: auto;
 }
 .heads{
-  background-color: #fca311;
+  background: rgba(229, 229, 229, .6);
   display:grid;
   grid-template-columns: 1fr 2fr 1fr;
+  top: 0;
 }
 .home{
   background-color: #e5e5e5;
   border-color: #000000;
-  border-radius: 8px;
+  border-radius: 0px;
   color: #000000;
   padding: 12px;
-  margin: auto;
+  margin: 2px;
+  border-style: solid;
+  border-width: 1px;
 }
 .admin{
   background-color: #e5e5e5;
   border-color: #000000;
-  border-radius: 8px;
+  border-radius: 0px;
   color: #000000;
   padding: 12px;
+  margin: 2px;
+  border-style: solid;
+  border-width: 1px;
   margin: auto;
 }
+a { color: #000000; }
 .tittle{
   margin: auto;
 }
 .Main{
     text-align: center;
     font-size: large;
-    margin-top: 30px;
+    margin-top: 200px;
     margin-bottom: 30px;
 }
 .log{
@@ -84,10 +96,20 @@ h5{
   padding-top: 10px;
   padding-bottom: 10px;
   color: aquamarine;
+  border-style: solid;
   background-color: #e5e5e5;
   border-color: #000000;
   color: #000000;
   border-radius: 8px;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+}
+input[type=text]{
+  border-radius: 8px;
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  border-color: white;
+  background-color: #000000;
+  text-align: center;
+  color: #e5e5e5
 }
 #fname{
     height: 35px;
@@ -151,32 +173,65 @@ h5{
   }
   .errorMessages{
     text-align: center;
-    color: #a4161a;
+    color: #D22B2B;
     font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 5s;
-   animation-fill-mode: forwards;
-
+    animation-fill-mode: forwards;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 8px;
+    width: fit-content;
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: 600;
   }
   .updateMessages{
-    text-align: center;
-    color: green;
+    color: #4e784f;
     font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 5s;
-   animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 8px;
+    display: flex;
+    flex-flow: column wrap;
+    width: fit-content;
+    font-size: 24px;
+    font-weight: 600;
   }
   .codeMessages{
     text-align: center;
-    color: green;
+    color: #4e784f;
     font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 10s;
     animation-fill-mode: forwards;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 8px;
+    display: flex;
+    flex-flow: column wrap;
+    width: fit-content;
+    font-size: 24px;
+    font-weight: 600;
   }
   table, th, td {
     margin: auto;
     text-align: left;
+  }
+  .messages{
+    position: relative;
   }
   @keyframes hideAnimation {
     to {
