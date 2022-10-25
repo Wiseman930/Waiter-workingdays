@@ -17,16 +17,16 @@ module.exports = function waiterRoute(db, waitersFunction){
 
 
       if (format.test(users) == true && wordCount.count == 0){
-      req.flash('codeMessages', 'Your login passcode is: ' + code)
+      req.flash('codeMessages', 'your login passcode is: ' + code)
       await waitersFunction.registerAll(uppercase, code)
       res.redirect('/');
       }
       else if (format.test(users) == true && wordCount.count == 1){
-      req.flash('errorMessages', 'You are registered')
+      req.flash('errorMessages', 'you are registered')
         res.redirect('/');
         }
       else if (format.test(users) == false){
-      req.flash('errorMessages', 'Enter alphabets only')
+      req.flash('errorMessages', 'enter alphabets only')
         res.redirect('/')
       }
     }
@@ -51,11 +51,11 @@ module.exports = function waiterRoute(db, waitersFunction){
         res.redirect('/days');
         }
       else if (storedCode.count == 0 || storedCode.count == undefined){
-        req.flash('errors', 'Invalid passcode')
+        req.flash('errors', 'invalid passcode')
         res.redirect('/index');
         }
       else if (format.test(name) == false){
-        req.flash('errors', 'Enter alphabets only')
+        req.flash('errors', 'enter alphabets only')
         res.redirect('/')
       }
     }
@@ -73,7 +73,7 @@ module.exports = function waiterRoute(db, waitersFunction){
     }
     else if(storedName.count == 0){
       res.redirect('/')
-      req.flash('errors', "Register first")
+      req.flash('errors', "register first")
     }
 
     }
@@ -91,7 +91,7 @@ module.exports = function waiterRoute(db, waitersFunction){
         req.flash('update', `your working days have been updated`)
       }
       if(days.length < 3){
-        req.flash('errors', `Add 3 or more working days`)
+        req.flash('errors', `add 3 or more working days`)
       }
       res.redirect(`/waiters/${uppercaseName}`);
 
@@ -106,11 +106,11 @@ module.exports = function waiterRoute(db, waitersFunction){
     async function dayPost (req, res) {
       let count = await db.one('SELECT COUNT(*) FROM working_waiters')
       await waitersFunction.deleteAll()
-      if(count.count > 0){
-        req.flash('update', "You have reseted the user's working days")
+      if(count.count > 1){
+        req.flash('update', "you have reseted the user's working days")
       }
       else if (count.count == 1){
-        req.flash('errors', "There are no user's working days")
+        req.flash('errors', "")
       }
       res.redirect('/days');
     }
@@ -142,7 +142,7 @@ module.exports = function waiterRoute(db, waitersFunction){
           update = 'working days updated'
           }
         else if (founddays == true){
-          working =  'A waiter must have 3 or more working days'
+          working =  'a waiter must have 3 or more working days'
           update = ''
 
         }

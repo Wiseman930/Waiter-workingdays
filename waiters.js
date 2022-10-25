@@ -1,6 +1,6 @@
 module.exports = function WaitersWorking(db){
 
-  let colors;
+
   let getWaiters = [];
 
    async function deleteAll(){
@@ -88,74 +88,98 @@ async function deleteAdmin(id, days){
 }
 async function renderAdmin(){
   let dataNames = await db.manyOrNone('SELECT id FROM working_waiters')
-          let arrayNames = dataNames.map(a => a.id)
-          let count = await db.manyOrNone('SELECT names FROM working_waiters')
-          let daysCount = await db.oneOrNone('SELECT COUNT(*) FROM available_days')
-          let names = count.map(a => a.names)
-          let checkState = [];
+  let arrayNames = dataNames.map(a => a.id)
+  let count = await db.manyOrNone('SELECT names FROM working_waiters')
+  let daysCount = await db.oneOrNone('SELECT COUNT(*) FROM available_days')
+  let names = count.map(a => a.names)
+  let checkState = [];
 
-        for (let i = 0; i < arrayNames.length; i++) {
-          let names2 = names[i]
-          let daysCount2 = await db.oneOrNone('SELECT COUNT(*) FROM available_days WHERE waiter_id=$1', [arrayNames[i]])
-          let = getDaysAdmin = await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1 ORDER BY waiter_id;', [arrayNames[i]])
+  let sevenDays = await db.manyOrNone('SELECT id FROM weekly_days')
+  let sevenDaysArr  = sevenDays.map(a => a.id)
 
-          let countMon = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [1])
-          let countTues = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [2])
-          let countWed = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1',[3])
-          let countThurs = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [4])
-          let countFri = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [5])
-          let countSat = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [6])
-          let countSun = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [7])
+  //this generates variables and assigns them to the id's from the weekly days table
+  let x = 'day'
+  for(i=0; i<sevenDaysArr.length; i++){
 
-          let colorMon = countMon.count < 3 ? "orange" : countMon.count == 3 ? "green" : countMon.count > 3 ? "red" : "orange";
-          let colorTues = countTues.count < 3 ? "orange" : countTues.count == 3 ? "green" : countTues.count > 3 ? "red" : "orange";
-          let colorWed = countWed.count < 3 ? "orange" : countWed.count == 3 ? "green" : countWed.count > 3 ? "red" : "orange";
-          let colorThurs = countThurs.count < 3 ? "orange" : countThurs.count == 3 ? "green" : countThurs.count > 3 ? "red" : "orange";
-          let colorFri = countFri.count < 3 ? "orange" : countFri.count == 3 ? "green" : countFri.count > 3 ? "red" : "orange";
-          let colorSat = countSat.count < 3 ? "orange" : countSat.count == 3 ? "green" : countSat.count > 3 ? "red" : "orange";
-          let colorSun = countSun.count < 3 ? "orange" : countSun.count == 3 ? "green" : countSun.count > 3 ? "red" : "orange";
+    let dailyCounts = await db.manyOrNone('SELECT id FROM weekly_days WHERE id = $1', [sevenDaysArr[i]])
+    let final = dailyCounts.map(a => a.id)
+    eval('var ' + x + i + '= ' + final.toString() + ';');
+  }
 
 
-          if(names2 !== 'ADMIN' && daysCount.count > 0 && daysCount2.count > 0){
+  let countMon = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day0])
+  let countTues = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day1])
+  let countWed = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1',[day2])
+  let countThurs = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day3])
+  let countFri = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day4])
+  let countSat = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day5])
+  let countSun = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day6])
 
-          let resultDays = getDaysAdmin.map(a => a.working_days)
-          let monday = !resultDays.includes(1) ? 'unchecked' : 'checked'
-          let tuesday = !resultDays.includes(2) ? 'unchecked' : 'checked'
-          let wednesday = !resultDays.includes(3) ? 'unchecked' : 'checked'
-          let thursday = !resultDays.includes(4) ? 'unchecked' : 'checked'
-          let friday = !resultDays.includes(5) ? 'unchecked' : 'checked'
-          let saturday = !resultDays.includes(6) ? 'unchecked' : 'checked'
-          let sunday = !resultDays.includes(7) ? 'unchecked' : 'checked'
+  let colorMon = countMon.count < 3 ? "orange" : countMon.count == 3 ? "green" : countMon.count > 3 ? "red" : "orange";
+  let colorTues = countTues.count < 3 ? "orange" : countTues.count == 3 ? "green" : countTues.count > 3 ? "red" : "orange";
+  let colorWed = countWed.count < 3 ? "orange" : countWed.count == 3 ? "green" : countWed.count > 3 ? "red" : "orange";
+  let colorThurs = countThurs.count < 3 ? "orange" : countThurs.count == 3 ? "green" : countThurs.count > 3 ? "red" : "orange";
+  let colorFri = countFri.count < 3 ? "orange" : countFri.count == 3 ? "green" : countFri.count > 3 ? "red" : "orange";
+  let colorSat = countSat.count < 3 ? "orange" : countSat.count == 3 ? "green" : countSat.count > 3 ? "red" : "orange";
+  let colorSun = countSun.count < 3 ? "orange" : countSun.count == 3 ? "green" : countSun.count > 3 ? "red" : "orange";
 
-          let res2 = {
-            names2,
-            monday,
-            tuesday,
-            wednesday,
-            thursday,
-            friday,
-            saturday,
-            sunday,
-            colorMon,
-            colorTues,
-            colorWed,
-            colorThurs,
-            colorFri,
-            colorSat,
-            colorSun,
-          }
-          let res3  = {
-            ...res2,
-          };
-          checkState.push(res3)
-        }
-      }
-      return checkState
+for (let i = 0; i < arrayNames.length; i++) {
+
+  let names2 = names[i]
+  let daysCount2 = await db.oneOrNone('SELECT COUNT(*) FROM available_days WHERE waiter_id=$1', [arrayNames[i]])
+  let = getDaysAdmin = await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1 ORDER BY waiter_id;', [arrayNames[i]])
+
+
+  if(names2 !== 'ADMIN' && daysCount.count > 0 && daysCount2.count > 0){
+
+  let resultDays = getDaysAdmin.map(a => a.working_days)
+  let monday = !resultDays.includes(day0) ? 'unchecked' : 'checked'
+  let tuesday = !resultDays.includes(day1) ? 'unchecked' : 'checked'
+  let wednesday = !resultDays.includes(day2) ? 'unchecked' : 'checked'
+  let thursday = !resultDays.includes(day3) ? 'unchecked' : 'checked'
+  let friday = !resultDays.includes(day4) ? 'unchecked' : 'checked'
+  let saturday = !resultDays.includes(day5) ? 'unchecked' : 'checked'
+  let sunday = !resultDays.includes(day6) ? 'unchecked' : 'checked'
+
+  let res2 = {
+    names2,
+    monday,
+    tuesday,
+    wednesday,
+    thursday,
+    friday,
+    saturday,
+    sunday,
+    colorMon,
+    colorTues,
+    colorWed,
+    colorThurs,
+    colorFri,
+    colorSat,
+    colorSun,
+  }
+  let res3  = {
+    ...res2,
+  };
+  checkState.push(res3)
+}
+}
+return checkState
 }
 async function waiterUpdate(enterName){
   let uppercaseName = enterName.toUpperCase();
 
+  let sevenDays = await db.manyOrNone('SELECT id FROM weekly_days')
+  let sevenDaysArr  = sevenDays.map(a => a.id)
 
+  //days
+  let x = 'day'
+  for(i=0; i<sevenDaysArr.length; i++){
+
+    let dailyCounts = await db.manyOrNone('SELECT id FROM weekly_days WHERE id = $1', [sevenDaysArr[i]])
+    let final = dailyCounts.map(a => a.id)
+    eval('var ' + x + i + '= ' + final.toString() + ';');
+  }
   let storedName = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE names=$1', [uppercaseName])
 
   if(storedName.count == 1 && uppercaseName !== 'ADMIN'){
@@ -165,13 +189,13 @@ async function waiterUpdate(enterName){
       getWaiters = []
 
 
-      let monday = !resultDays.includes(1) ? 'unchecked' : 'checked'
-      let tuesday = !resultDays.includes(2) ? 'unchecked' : 'checked'
-      let wednesday = !resultDays.includes(3) ? 'unchecked' : 'checked'
-      let thursday = !resultDays.includes(4) ? 'unchecked' : 'checked'
-      let friday = !resultDays.includes(5) ? 'unchecked' : 'checked'
-      let saturday = !resultDays.includes(6) ? 'unchecked' : 'checked'
-      let sunday = !resultDays.includes(7) ? 'unchecked' : 'checked'
+      let monday = !resultDays.includes(day0) ? 'unchecked' : 'checked'
+      let tuesday = !resultDays.includes(day1) ? 'unchecked' : 'checked'
+      let wednesday = !resultDays.includes(day2) ? 'unchecked' : 'checked'
+      let thursday = !resultDays.includes(day3) ? 'unchecked' : 'checked'
+      let friday = !resultDays.includes(day4) ? 'unchecked' : 'checked'
+      let saturday = !resultDays.includes(day5) ? 'unchecked' : 'checked'
+      let sunday = !resultDays.includes(day6) ? 'unchecked' : 'checked'
 
 
       let waiterDays =  {registerName: enterName.toUpperCase(),
@@ -187,7 +211,6 @@ async function waiterUpdate(enterName){
 }
 }
 async function getWaiterDays(){
-  console.log(getWaiters)
   return getWaiters
 }
 
@@ -216,7 +239,7 @@ async function returnUserAdminId(user_id){
         returnUserAdminId,
         renderAdmin,
         waiterUpdate,
-        getWaiterDays
+        getWaiterDays,
     }
 
 }
