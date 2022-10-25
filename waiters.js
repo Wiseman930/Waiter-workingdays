@@ -106,22 +106,22 @@ async function renderAdmin(){
     eval('var ' + x + i + '= ' + final.toString() + ';');
   }
 
+  // this generates variables and assigns them to the count of each day from maonday to sunday
+  let y = 'count'
+  for(i=0; i<sevenDaysArr.length; i++){
 
-  let countMon = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day0])
-  let countTues = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day1])
-  let countWed = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1',[day2])
-  let countThurs = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day3])
-  let countFri = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day4])
-  let countSat = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day5])
-  let countSun = await db.one('SELECT COUNT(*) FROM available_days WHERE working_days=$1', [day6])
+    let dailyCounts = await db.manyOrNone('SELECT COUNT(*) FROM available_days WHERE working_days = $1', [sevenDaysArr[i]])
+    let final = dailyCounts.map(a => a.count)
+    eval('var ' + y + i + '= ' + final.toString() + ';');
+  }
 
-  let colorMon = countMon.count < 3 ? "orange" : countMon.count == 3 ? "green" : countMon.count > 3 ? "red" : "orange";
-  let colorTues = countTues.count < 3 ? "orange" : countTues.count == 3 ? "green" : countTues.count > 3 ? "red" : "orange";
-  let colorWed = countWed.count < 3 ? "orange" : countWed.count == 3 ? "green" : countWed.count > 3 ? "red" : "orange";
-  let colorThurs = countThurs.count < 3 ? "orange" : countThurs.count == 3 ? "green" : countThurs.count > 3 ? "red" : "orange";
-  let colorFri = countFri.count < 3 ? "orange" : countFri.count == 3 ? "green" : countFri.count > 3 ? "red" : "orange";
-  let colorSat = countSat.count < 3 ? "orange" : countSat.count == 3 ? "green" : countSat.count > 3 ? "red" : "orange";
-  let colorSun = countSun.count < 3 ? "orange" : countSun.count == 3 ? "green" : countSun.count > 3 ? "red" : "orange";
+  let colorMon = count0 < 3 ? "orange" : count0  == 3 ? "green" : count0 > 3 ? "red" : "orange";
+  let colorTues = count1 < 3 ? "orange" : count1 == 3 ? "green" : count1 > 3 ? "red" : "orange";
+  let colorWed = count2 < 3 ? "orange" : count2  == 3 ? "green" : count2 > 3 ? "red" : "orange";
+  let colorThurs = count3< 3 ? "orange" : count3  == 3 ? "green" : count3 > 3 ? "red" : "orange";
+  let colorFri = count4 < 3 ? "orange" : count4  == 3 ? "green" : count4 > 3 ? "red" : "orange";
+  let colorSat = count5 < 3 ? "orange" : count5  == 3 ? "green" : count5 > 3 ? "red" : "orange";
+  let colorSun = count6 < 3 ? "orange" : count6  == 3 ? "green" : count6 > 3  ? "red" : "orange";
 
 for (let i = 0; i < arrayNames.length; i++) {
 
