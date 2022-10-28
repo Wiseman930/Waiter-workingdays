@@ -107,56 +107,67 @@ async function renderAdmin(){
   }
 
   // this generates variables and assigns them to the count of each day from monday to sunday
-  let y = 'count'
+  let y = 'counts'
+
   for(i=0; i<sevenDaysArr.length; i++){
 
     let dailyCounts = await db.manyOrNone('SELECT COUNT(*) FROM available_days WHERE working_days = $1', [sevenDaysArr[i]])
     let final = dailyCounts.map(a => a.count)
     eval('var ' + y + i + '= ' + final.toString() + ';');
+
+
+
+  }
+  let color = 'color'
+  let red = 'red';
+  let green = 'green'
+  let orange = 'orange'
+  let finalS = [counts0,counts1,counts2,counts3,counts4,counts5,counts6]
+
+  for(i=0; i<finalS.length; i++){
+    let dailyCounts = await db.manyOrNone('SELECT COUNT(*) FROM available_days WHERE working_days = $1', [sevenDaysArr[i]])
+    let final = dailyCounts.map(a => a.count)
+    eval('var ' + color + i + '= ' + (final.toString() < 3 ? orange : final.toString()  == 3 ? green : final.toString() > 3 ? red : orange) + ';');
   }
 
-  let colorMon = count0 < 3 ? "orange" : count0  == 3 ? "green" : count0 > 3 ? "red" : "orange";
-  let colorTues = count1 < 3 ? "orange" : count1 == 3 ? "green" : count1 > 3 ? "red" : "orange";
-  let colorWed = count2 < 3 ? "orange" : count2  == 3 ? "green" : count2 > 3 ? "red" : "orange";
-  let colorThurs = count3< 3 ? "orange" : count3  == 3 ? "green" : count3 > 3 ? "red" : "orange";
-  let colorFri = count4 < 3 ? "orange" : count4  == 3 ? "green" : count4 > 3 ? "red" : "orange";
-  let colorSat = count5 < 3 ? "orange" : count5  == 3 ? "green" : count5 > 3 ? "red" : "orange";
-  let colorSun = count6 < 3 ? "orange" : count6  == 3 ? "green" : count6 > 3  ? "red" : "orange";
+  let daily = 'daily';
+  let checked = 'checked';
+  let unchecked = 'unchecked';
+  let final_weekly = [day0,day1,day2,day3,day4,day5,day6]
+
 
 for (let i = 0; i < arrayNames.length; i++) {
 
   let names2 = names[i]
   let daysCount2 = await db.oneOrNone('SELECT COUNT(*) FROM available_days WHERE waiter_id=$1', [arrayNames[i]])
   let = getDaysAdmin = await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1 ORDER BY waiter_id;', [arrayNames[i]])
-
+0.
 
   if(names2 !== 'ADMIN' && daysCount.count > 0 && daysCount2.count > 0){
 
   let resultDays = getDaysAdmin.map(a => a.working_days)
-  let monday = !resultDays.includes(day0) ? 'unchecked' : 'checked'
-  let tuesday = !resultDays.includes(day1) ? 'unchecked' : 'checked'
-  let wednesday = !resultDays.includes(day2) ? 'unchecked' : 'checked'
-  let thursday = !resultDays.includes(day3) ? 'unchecked' : 'checked'
-  let friday = !resultDays.includes(day4) ? 'unchecked' : 'checked'
-  let saturday = !resultDays.includes(day5) ? 'unchecked' : 'checked'
-  let sunday = !resultDays.includes(day6) ? 'unchecked' : 'checked'
+
+  for(t=0; t<final_weekly.length; t++){
+    eval('var ' + daily + t + '= ' + (!resultDays.includes(final_weekly[t]) ? unchecked : checked) + ';');
+  }
+
 
   let res2 = {
     names2,
-    monday,
-    tuesday,
-    wednesday,
-    thursday,
-    friday,
-    saturday,
-    sunday,
-    colorMon,
-    colorTues,
-    colorWed,
-    colorThurs,
-    colorFri,
-    colorSat,
-    colorSun,
+    daily0,
+    daily1,
+    daily2,
+    daily3,
+    daily4,
+    daily5,
+    daily6,
+    color0,
+    color1,
+    color2,
+    color3,
+    color4,
+    color5,
+    color6,
   }
   let res3  = {
     ...res2,
@@ -248,3 +259,27 @@ async function returnUserAdminId(user_id){
 
 
 
+/*
+let count = [count0,count1,count2,count3,count4,count5,count6]
+let red = 'red'
+let green = 'green'
+let orange = 'orange'
+
+
+  let y = 'color'
+  for(i=0; i< count.length; i++){
+    if(count[i] = 3){
+    eval('var ' + y + i + '= ' + green + ';');
+    }
+    else if(count[i] > 3){
+    eval('var ' + y + i + '= ' + red + ';');
+    }
+    else if(count[i] < 3){
+    eval('var ' + y + i + '= ' + orange + ';');
+    }
+  }
+console.log(color0)
+console.log(color1)
+console.log(color2)
+console.log(color3)
+*/

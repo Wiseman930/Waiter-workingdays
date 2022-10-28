@@ -1,4 +1,4 @@
-/*const assert = require('assert');
+const assert = require('assert');
 const waiterDays = require('../waiters');
 const pgp = require('pg-promise')();
 
@@ -14,8 +14,8 @@ const db = pgp(config);
 describe('Waiters function for users', function(){
 
     beforeEach(async function(){
-   await db.none('DELETE FROM working_waiters;');
-   await db.none('DELETE FROM available_days;');
+  await db.none('DELETE FROM working_waiters;');
+  await db.none('DELETE FROM available_days;');
 
     });
 it("should be able to register a worker", async function(){
@@ -528,5 +528,4 @@ it("Admin should be able to see checked and unchecked days, and wether there is 
 
 
             });
-
-});*/
+});
