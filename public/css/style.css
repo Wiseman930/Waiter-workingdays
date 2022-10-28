@@ -121,9 +121,9 @@ input[type=text]{
   border-radius: 8px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   border-color: white;
-  background-color: #000000;
+  background: #000000;
   text-align: center;
-  color: #e5e5e5
+
 }
 #fname{
     height: 35px;

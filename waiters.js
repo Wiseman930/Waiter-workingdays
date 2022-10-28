@@ -106,7 +106,7 @@ async function renderAdmin(){
     eval('var ' + x + i + '= ' + final.toString() + ';');
   }
 
-  // this generates variables and assigns them to the count of each day from maonday to sunday
+  // this generates variables and assigns them to the count of each day from monday to sunday
   let y = 'count'
   for(i=0; i<sevenDaysArr.length; i++){
 
@@ -166,6 +166,8 @@ for (let i = 0; i < arrayNames.length; i++) {
 }
 return checkState
 }
+
+
 async function waiterUpdate(enterName){
   let uppercaseName = enterName.toUpperCase();
 
