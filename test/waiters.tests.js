@@ -1,4 +1,4 @@
-const assert = require('assert');
+/*const assert = require('assert');
 const waiterDays = require('../waiters');
 const pgp = require('pg-promise')();
 
@@ -528,4 +528,4 @@ it("Admin should be able to see checked and unchecked days, and wether there is 
 
 
             });
-});
+});*/

@@ -22,17 +22,13 @@
                     </div>
     </div>
     <form action="register" method="post">
-        <div class="Main">
-            <label for="sizeLarge"></label>
-            <input type="text" placeholder="Enter Name" id="fname" name="fname">
-            <label for="fname"></label>
-            <input type="submit" class="log" name="fontSizeControl" id="sizeLarge" value="Register"/>
-        </div>
-    </form>
-     <div class="p">
+<div class="login">
+  <h2 class="login-header">Register</h2>
+  <form class="login-container">
+    <p><input type="text" placeholder="Enter Name" name="fname"></p>
+    <p><input type="submit" name="fontSizeControl" value="submit"></p>
+    <div class="p">
     <P>
-   <marquee> Register to get the login passcode</marquee>
-    <br>
         <div class="messages">
         <div class="errorMessages">
             <span>{{messages.errorMessages}}</span>
@@ -45,5 +41,14 @@
     </div>
     </P>
     </div>
+</div>
+    </form>
 </body>
 </html>
+
+<!--         <div class="Main">
+            <label for="sizeLarge"></label>
+            <input type="text" placeholder="Enter Name" id="fname" name="fname">
+            <label for="fname"></label>
+            <input type="submit" class="log" name="fontSizeControl" id="sizeLarge" value="Register"/>
+        </div>>
