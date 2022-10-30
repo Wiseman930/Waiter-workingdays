@@ -17,7 +17,7 @@ module.exports = function waiterRoute(db, waitersFunction){
 
 
       if (format.test(users) == true && wordCount.count == 0){
-      req.flash('codeMessages', 'your login passcode is: ' + code)
+      req.flash('codeMessages', 'login passcode: ' + code)
       await waitersFunction.registerAll(uppercase, code)
       res.redirect('/');
       }
@@ -135,7 +135,6 @@ module.exports = function waiterRoute(db, waitersFunction){
         let founddays = lessDays.some(r=> arr2.includes(r))
 
         if(founddays == false){
-
           await waitersFunction.usersForAdmin(user_id, userCheckbox)
           await waitersFunction.deleteAdmin(user_id, userCheckbox)
           await waitersFunction.insertValuesAdmin(user_id, userCheckbox)

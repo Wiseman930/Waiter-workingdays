@@ -22,15 +22,17 @@ h1{
   padding-bottom: 15px;
   font-size: 25px
 }
-h4{
+.p{
   background: rgba(229, 229, 229, .7);
   padding: 10px;
   text-align: center;
   width: fit-content;
-  border-radius: 8px;
+  border-radius: 0px;
   margin: auto;
   font-size: 16px;
+  border-left: 6px solid #f44336;
 }
+
 .center{
   display: block;
   margin-left: auto;
@@ -101,8 +103,9 @@ a { color: #000000; }
 .Main{
     text-align: center;
     font-size: large;
-    margin-top: 200px;
+    margin-top: 150px;
     margin-bottom: 30px;
+
 }
 .log{
   padding-left: 30px;
@@ -119,10 +122,8 @@ a { color: #000000; }
 input[type=text]{
   border-radius: 8px;
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
-  border-color: white;
-  background: #000000;
   text-align: center;
-  color: #ffffff;
+  color: #000000;
 }
 #fname{
     height: 35px;
@@ -187,7 +188,6 @@ input[type=text]{
   .errorMessages{
     text-align: center;
     color: #D22B2B;
-    font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 5s;
     animation-fill-mode: forwards;
@@ -199,12 +199,10 @@ input[type=text]{
     padding: 8px;
     width: fit-content;
     margin-top: 20px;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
   }
   .updateMessages{
     color: #4e784f;
-    font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 5s;
     animation-fill-mode: forwards;
@@ -217,13 +215,11 @@ input[type=text]{
     display: flex;
     flex-flow: column wrap;
     width: fit-content;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
   }
   .codeMessages{
     text-align: center;
     color: #4e784f;
-    font-size: 30px;
     font-weight: 700;
     animation: hideAnimation 0s ease-in 10s;
     animation-fill-mode: forwards;
@@ -236,8 +232,7 @@ input[type=text]{
     display: flex;
     flex-flow: column wrap;
     width: fit-content;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
   }
   table, th, td {
     margin: auto;
@@ -245,6 +240,88 @@ input[type=text]{
   }
   .messages{
     position: relative;
+  }
+  .login {
+    width: 400px;
+    margin: 16px auto;
+    font-size: 16px;
+  }
+
+  /* Reset top and bottom margins from certain elements */
+  .login-header,
+  .login p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* The triangle form is achieved by a CSS hack */
+  .login-triangle {
+    width: 0;
+    margin-right: auto;
+    margin-left: auto;
+    border: 12px solid transparent;
+    border-bottom-color: #28d;
+  }
+
+  .login-header {
+    background: #28d;
+    padding: 20px;
+    font-size: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .login-container {
+    background: #ebebeb;
+    padding: 12px;
+  }
+
+  /* Every row inside .login-container is defined with p tags */
+  .login p {
+    padding: 12px;
+  }
+
+  .login input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    padding: 16px;
+    outline: 0;
+    font-family: inherit;
+    font-size: 0.95em;
+  }
+
+  .login input[type="email"],
+  .login input[type="password"] {
+    background: #fff;
+    border-color: #bbb;
+    color: #555;
+  }
+
+  /* Text fields' focus effect */
+  .login input[type="email"]:focus,
+  .login input[type="password"]:focus {
+    border-color: #888;
+  }
+
+  .login input[type="submit"] {
+    background: #28d;
+    border-color: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .login input[type="submit"]:hover {
+    background: #17c;
+  }
+
+  /* Buttons' focus effect */
+  .login input[type="submit"]:focus {
+    border-color: #05a;
   }
   @keyframes hideAnimation {
     to {
