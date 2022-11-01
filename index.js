@@ -19,9 +19,9 @@ const DATABASE_URL = process.env.DATABASE_URL || "postgresql://postgres:pg1999@l
 
 const config = {
   connectionString: DATABASE_URL,
- ssl: {
+ /*ssl: {
     rejectUnauthorized: false,
-  },
+  }, */
 };
 
 const db = pgp(config);

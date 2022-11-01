@@ -1,18 +1,75 @@
 module.exports = function WaitersWorking(db){
 
 
+
+
   let getWaiters = [];
+  let wordCount;
+  let name;
+  let storedCode ;
+  let storedDynamicCount ;
+  let storedName ;
+  let daysCount2;
 
    async function deleteAll(){
     await db.none('DELETE FROM working_waiters WHERE names!=$1;', 'ADMIN');
     await db.none('DELETE FROM available_days;');
     return await db.manyOrNone('SELECT working_days FROM available_days')
   }
+  async function countOfUser(uppercase){
+    wordCount = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE names=$1', [uppercase])
+ }
+
+ function returnCountUser(){
+  return wordCount.count;
+}
+async function nameAndCode(userCode){
+   name = await db.oneOrNone('SELECT names FROM working_waiters WHERE code=$1', [userCode]) || {}
+   storedCode = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE code=$1', [userCode])
+}
+
+async function returnNameAndCode(){
+  let naming = name.names;
+  let coding = storedCode.count
+  let code_name = {
+    naming,
+    coding
+  }
+  return code_name
+}
+async function dynamicCount(uppercaseName){
+  storedDynamicCount = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE names=$1', [uppercaseName])
+
+}
+async function returnDynamicCount(){
+  return storedDynamicCount;
+}
+async function notAdminName(){
+  let excludeAdmin = await db.manyOrNone('SELECT names FROM working_waiters WHERE names != $1', 'ADMIN')
+  return excludeAdmin;
+}
+async function storedID(names2){
+   storedName = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", names2) || {}
+   let user_id = storedName.id
+   daysCount2 = await db.oneOrNone('SELECT COUNT(*) FROM available_days WHERE waiter_id=$1', [user_id])
+}
+async function returnStoredId(){
+  return storedName;
+}
+async function daysCount(){
+    return daysCount2
+}
+async function allCounts(){
+  let count = await db.one('SELECT COUNT(*) FROM working_waiters')
+  return count;
+}
+
   async function registerAll(firstName, code){
-   await db.none('INSERT INTO working_waiters(names, code) values($1, $2)', [firstName, code])
+   wordCount = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE names=$1', [firstName]) || {}
+   await db.oneOrNone('INSERT INTO working_waiters(names, code) values($1, $2)', [firstName, code])
    }
    async function returnRegistered(){
-    return await db.one('SELECT names,code FROM working_waiters')
+    return await db.oneOrNone('SELECT names,code FROM working_waiters')
    }
    async function loginNames(logNames, days){
     toNewDays = days
@@ -214,7 +271,6 @@ async function getWaiterDays(){
   return getWaiters
 }
 
-
 async function insertValues(uppercaseName){
   let storedNameID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", [uppercaseName]) || {}
   return await db.manyOrNone('SELECT working_days FROM available_days WHERE waiter_id=$1', [storedNameID.id])
@@ -240,6 +296,17 @@ async function returnUserAdminId(user_id){
         renderAdmin,
         waiterUpdate,
         getWaiterDays,
+        countOfUser,
+        returnCountUser,
+        nameAndCode,
+        returnNameAndCode,
+        dynamicCount,
+        returnDynamicCount,
+        notAdminName,
+        storedID,
+        returnStoredId,
+        daysCount,
+        allCounts
     }
 
 }

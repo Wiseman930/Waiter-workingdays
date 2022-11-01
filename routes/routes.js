@@ -13,15 +13,16 @@ module.exports = function waiterRoute(db, waitersFunction){
       let users = req.body.fname
       let format = /^[A-Za-z]+$/
       let uppercase = users.toUpperCase();
-      let wordCount = await db.one('SELECT COUNT(*) FROM working_waiters WHERE names=$1', [users.toUpperCase()])
+      await waitersFunction.countOfUser(uppercase)
+      let wordCount = waitersFunction.returnCountUser()
 
-
-      if (format.test(users) == true && wordCount.count == 0){
+      if (format.test(users) == true && wordCount == 0){
       req.flash('codeMessages', 'login passcode: ' + code)
+
       await waitersFunction.registerAll(uppercase, code)
       res.redirect('/');
       }
-      else if (format.test(users) == true && wordCount.count == 1){
+      else if (format.test(users) == true && wordCount == 1){
       req.flash('errorMessages', 'you are registered')
         res.redirect('/');
         }
@@ -37,24 +38,26 @@ module.exports = function waiterRoute(db, waitersFunction){
 
      async function waiterRoute (req, res) {
       let userCode = req.body.fname
-      let name = await db.oneOrNone('SELECT names FROM working_waiters WHERE code=$1', [userCode]) || {}
+      await waitersFunction.nameAndCode(userCode)
+
+
+      let name = await waitersFunction.returnNameAndCode()
       let format = /^[A-Za-z]+$/
+      let storedCode = await waitersFunction.returnNameAndCode()
 
-      let storedCode = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE code=$1', [userCode])
-
-      if (storedCode.count == 1 && name.names !== 'ADMIN'){
-      let upperName = name.names.toUpperCase()
+      if (storedCode.coding == 1 && name.naming !== 'ADMIN'){
+      let upperName = name.naming.toUpperCase()
       waitersFunction.loginNames(upperName)
       res.redirect(`/waiters/${upperName}`);
       }
-      else if (storedCode.count == 1 && name.names == 'ADMIN'){
+      else if (storedCode.coding == 1 && name.naming == 'ADMIN'){
         res.redirect('/days');
         }
-      else if (storedCode.count == 0 || storedCode.count == undefined){
+      else if (storedCode.coding == 0 || storedCode.coding == undefined){
         req.flash('errors', 'invalid passcode')
         res.redirect('/index');
         }
-      else if (format.test(name) == false){
+      else if (format.test(name.naming) == false){
         req.flash('errors', 'enter alphabets only')
         res.redirect('/')
       }
@@ -64,7 +67,8 @@ module.exports = function waiterRoute(db, waitersFunction){
       let enterName = req.params.username;
 
       let uppercaseName = enterName.toUpperCase();
-      let storedName = await db.oneOrNone('SELECT COUNT(*) FROM working_waiters WHERE names=$1', [uppercaseName])
+      await waitersFunction.dynamicCount(uppercaseName)
+      let storedName =  await waitersFunction.returnDynamicCount()
 
       if(storedName.count == 1 && uppercaseName !== 'ADMIN'){
       await waitersFunction.waiterUpdate(enterName)
@@ -104,7 +108,8 @@ module.exports = function waiterRoute(db, waitersFunction){
     }
 
     async function dayPost (req, res) {
-      let count = await db.one('SELECT COUNT(*) FROM working_waiters')
+
+      let count = await waitersFunction.allCounts()
       await waitersFunction.deleteAll()
       if(count.count > 1){
         req.flash('update', "you have reseted the user's working days")
@@ -116,7 +121,7 @@ module.exports = function waiterRoute(db, waitersFunction){
     }
 
    async function updateAdmin (req, res) {
-    let count = await db.manyOrNone('SELECT names FROM working_waiters WHERE names != $1', 'ADMIN')
+    let count = await waitersFunction.notAdminName()
     let names = count.map(a => a.names);
     let update;
     let working;
@@ -124,9 +129,10 @@ module.exports = function waiterRoute(db, waitersFunction){
 
     for (let i = 0; i < names.length; i++) {
       let names2 = names[i]
-      let storedNameID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", names2) || {}
+      await waitersFunction.storedID(names2)
+      let storedNameID = await waitersFunction.returnStoredId() || {}
       let user_id = storedNameID.id
-      let daysCount2 = await db.oneOrNone('SELECT COUNT(*) FROM available_days WHERE waiter_id=$1', [user_id])
+      let daysCount2 = await waitersFunction.daysCount()
       let userCheckbox = req.body[names[i]] || []
 
       if(daysCount2.count > 0){

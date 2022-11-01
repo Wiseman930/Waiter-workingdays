@@ -1,4 +1,4 @@
-/*const assert = require('assert');
+const assert = require('assert');
 const waiterDays = require('../waiters');
 const pgp = require('pg-promise')();
 
@@ -491,41 +491,204 @@ it("Admin cannot add/insert same day twice into database", async function(){
         });
 
 
-it("Admin should be able to see checked and unchecked days, and wether there is enough subcription for each day", async function(){
+it("Admin should be able to see checked and unchecked days, and wether there is enough,less or more subcription for each day", async function(){
             let waiters = waiterDays(db);
             let uid = new shortCode({length: 6});
             let code = uid()
 
-            await waiters.registerAll("JONAS", code);
-            assert.deepEqual({
-                code: code,
-                names: 'JONAS'
-            }, await waiters.returnRegistered());
+            await waiters.registerAll("JONAS", 'yt47hg');
             let ID = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", ['JONAS'])
+
+            await waiters.registerAll("QUEEN", 'fehfmw');
+            let ID2 = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", ['QUEEN'])
+
+            await waiters.registerAll("WISEMAN", 'fgtred');
+            let ID3 = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", ['WISEMAN'])
+
+            await waiters.registerAll("MABUSELA", 'fgtred');
+            let ID4 = await db.oneOrNone("SELECT id FROM working_waiters WHERE names=$1", ['MABUSELA'])
+
+
 
             await waiters.usersForAdmin(ID.id, ['1','4', '4', '5']);
             await waiters.deleteAdmin(ID.id, ['1','4', '4', '5']);
 
+            await waiters.usersForAdmin(ID2.id, ['1','4', '4', '5']);
+            await waiters.deleteAdmin(ID2.id, ['1','4', '4', '5']);
+
             assert.deepEqual([
                 {
-                  colorFri: 'orange',
-                  colorMon: 'orange',
-                  colorSat: 'orange',
-                  colorSun: 'orange',
-                  colorThurs: 'orange',
-                  colorTues: 'orange',
-                  colorWed: 'orange',
-                  friday: 'checked',
-                  monday: 'checked',
-                  names2: 'JONAS',
-                  saturday: 'unchecked',
-                  sunday: 'unchecked',
-                  thursday: 'checked',
-                  tuesday: 'unchecked',
-                  wednesday: 'unchecked'
-                }
+                    color0: 'orange',
+                    color1: 'orange',
+                    color2: 'orange',
+                    color3: 'orange',
+                    color4: 'orange',
+                    color5: 'orange',
+                    color6: 'orange',
+                    daily0: 'checked',
+                    daily1: 'unchecked',
+                    daily2: 'unchecked',
+                    daily3: 'checked',
+                    daily4: 'checked',
+                    daily5: 'unchecked',
+                    daily6: 'unchecked',
+                    names2: 'JONAS',
+
+                  },
+                  {
+                    color0: 'orange',
+                    color1: 'orange',
+                    color2: 'orange',
+                    color3: 'orange',
+                    color4: 'orange',
+                    color5: 'orange',
+                    color6: 'orange',
+                    daily0: 'checked',
+                    daily1: 'unchecked',
+                    daily2: 'unchecked',
+                    daily3: 'checked',
+                    daily4: 'checked',
+                    daily5: 'unchecked',
+                    daily6: 'unchecked',
+                    names2: 'QUEEN',
+
+                  }
+              ], await waiters.renderAdmin());
+
+            await waiters.usersForAdmin(ID3.id, ['1','4', '4', '5']);
+            await waiters.deleteAdmin(ID3.id, ['1','4', '4', '5']);
+
+            assert.deepEqual([
+                {
+                    color0: 'green',
+                    color1: 'orange',
+                    color2: 'orange',
+                    color3: 'green',
+                    color4: 'green',
+                    color5: 'orange',
+                    color6: 'orange',
+                    daily0: 'checked',
+                    daily1: 'unchecked',
+                    daily2: 'unchecked',
+                    daily3: 'checked',
+                    daily4: 'checked',
+                    daily5: 'unchecked',
+                    daily6: 'unchecked',
+                    names2: 'JONAS'
+                  },
+                  {
+                    color0: 'green',
+                    color1: 'orange',
+                    color2: 'orange',
+                    color3: 'green',
+                    color4: 'green',
+                    color5: 'orange',
+                    color6: 'orange',
+                    daily0: 'checked',
+                    daily1: 'unchecked',
+                    daily2: 'unchecked',
+                    daily3: 'checked',
+                    daily4: 'checked',
+                    daily5: 'unchecked',
+                    daily6: 'unchecked',
+                    names2: 'QUEEN'
+                  },
+                  {
+                    color0: 'green',
+                    color1: 'orange',
+                    color2: 'orange',
+                    color3: 'green',
+                    color4: 'green',
+                    color5: 'orange',
+                    color6: 'orange',
+                    daily0: 'checked',
+                    daily1: 'unchecked',
+                    daily2: 'unchecked',
+                    daily3: 'checked',
+                    daily4: 'checked',
+                    daily5: 'unchecked',
+                    daily6: 'unchecked',
+                    names2: 'WISEMAN'
+                  }
+              ], await waiters.renderAdmin());
+
+              await waiters.usersForAdmin(ID4.id, ['1','4', '4', '5']);
+              await waiters.deleteAdmin(ID4.id, ['1','4', '4', '5']);
+
+              assert.deepEqual([
+                {
+                    color0: 'red',
+                    color1: 'orange',
+                    color2: 'orange',
+                    color3: 'red',
+                    color4: 'red',
+                    color5: 'orange',
+                    color6: 'orange',
+                    daily0: 'checked',
+                    daily1: 'unchecked',
+                    daily2: 'unchecked',
+                    daily3: 'checked',
+                    daily4: 'checked',
+                    daily5: 'unchecked',
+                    daily6: 'unchecked',
+                    names2: 'JONAS'
+                  },
+                  {
+                    color0: 'red',
+                    color1: 'orange',
+                    color2: 'orange',
+                    color3: 'red',
+                    color4: 'red',
+                    color5: 'orange',
+                    color6: 'orange',
+                    daily0: 'checked',
+                    daily1: 'unchecked',
+                    daily2: 'unchecked',
+                    daily3: 'checked',
+                    daily4: 'checked',
+                    daily5: 'unchecked',
+                    daily6: 'unchecked',
+                    names2: 'QUEEN'
+                  },
+                  {
+                    color0: 'red',
+                    color1: 'orange',
+                    color2: 'orange',
+                    color3: 'red',
+                    color4: 'red',
+                    color5: 'orange',
+                    color6: 'orange',
+                    daily0: 'checked',
+                    daily1: 'unchecked',
+                    daily2: 'unchecked',
+                    daily3: 'checked',
+                    daily4: 'checked',
+                    daily5: 'unchecked',
+                    daily6: 'unchecked',
+                    names2: 'WISEMAN'
+                  },
+                  {
+                    color0: 'red',
+                    color1: 'orange',
+                    color2: 'orange',
+                    color3: 'red',
+                    color4: 'red',
+                    color5: 'orange',
+                    color6: 'orange',
+                    daily0: 'checked',
+                    daily1: 'unchecked',
+                    daily2: 'unchecked',
+                    daily3: 'checked',
+                    daily4: 'checked',
+                    daily5: 'unchecked',
+                    daily6: 'unchecked',
+                    names2: 'MABUSELA'
+                  }
+
               ], await waiters.renderAdmin());
 
 
+
+
             });
-});*/
+});
